@@ -1,8 +1,13 @@
 import React from 'react'
+import logo from './images/splashlogo.png'
 
-export default function() {
+export default function({ fade }){
 
     return(
-        <div></div>
+
+        <div className = {`loading ${fade}`}>
+            <img src = {logo} alt = 'loading logo' />
+        </div>
+
     )
 }
