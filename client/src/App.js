@@ -1,31 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.css'
+import axios from 'axios'
 import Loading from './Loading'
-import Header from './Header'
-import Feed from './Feed'
-import Footer from './Footer'
+import Main from './Main'
 
 export default function App() {
 
-  const [data, setData] = useState()
+  const [loading, setLoading] = useState(true)
+  const [feedData, setFeedData] = useState()
 
-  setTimeout( () => setData('sdasd'), 2000)
+  useEffect( () => {
+    fetchFeedData()
+  }, [])
 
+  const fetchFeedData = async () => {
+    try {
+      const res = await axios.post(`/feed`)      
+      setFeedData(res.data.data)
+      setLoading(false)
+    }
+    catch(err) {
+      console.log(err.message)
+      window.location.reload()
+    }
+  }
+  
   return (
 
-    <div className="App">
+    <div className = 'App'>
 
-      {/* <Loading fade = {data ? 'fade' : ''} /> */}
+      { loading && <Loading /> }
 
-      {/* {data && <> */}
-
-        <Header />
-
-        <Feed />
-
-        <Footer />
-
-        {/* </> } */}
+      { !loading && <Main feedData = {feedData} /> }
 
     </div>
   )

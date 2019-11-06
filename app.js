@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
   res.send(`server`)
 })
 
-// const routes = require('./routes/routes')
-// app.use('/', routes)
+const routes = require('./routes')
+app.use('/', routes)
 
 app.listen(port, () => {  
   console.log(`Listening on ${port}`)

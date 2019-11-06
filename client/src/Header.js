@@ -2,9 +2,10 @@ import React from 'react'
 import logo from './images/pawslogo.png'
 import pawson from './images/pawson.png'
 
-export default function() {
-
+export default function({ isLoggedIn, setDisplay, userData }) {
+    
     return(
+
         <div className = 'header'>
 
             <div className = 'header-logo'>
@@ -13,19 +14,32 @@ export default function() {
 
                 <img src = {pawson} alt = 'pawson' />
 
-                {/* <p>PawsOn</p> */}
-
             </div>
 
+            {!isLoggedIn &&
             <div className = 'header-login-signup'>
 
-                <p>Log In</p>
+                <p
+                onClick = { () => setDisplay('login') } >
+                Log In</p>
 
                 OR
 
-                <button>Create New Account</button>
+                <button
+                className = 'blue-button'
+                onClick = { () => setDisplay('register') } >
+                Create New Account</button>
 
-            </div>
+            </div> }
+
+            {isLoggedIn &&
+            <div className = 'header-loggedin'>
+
+                <p>Hello {userData.name}!</p>
+
+                <img src = {userData.avatar} alt = 'user pic' />
+
+            </div> }
 
         </div>
     )

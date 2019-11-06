@@ -17,6 +17,67 @@ button {
   cursor: pointer;
 }
 
+button:focus {
+  animation: click .25s;
+}
+
+input {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(89, 73, 158, 0.6);
+  font-size: 20px;
+  line-height: 33px;
+  color: rgba(89, 73, 158, 0.6);
+}
+
+input[type="checkbox"] {
+  width: 25px !important;
+  height: 25px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1.5px solid rgba(89, 73, 158, 0.6);
+}
+
+input[type="checkbox"]:checked {
+  background-color: rgba(89, 73, 158, 0.6);
+}
+
+select {
+  outline: 0;
+  border: 0;
+  background-color: #FFF;
+  width: 95%;
+  font-size: 20px;
+  line-height: 30px;
+  color: rgba(89, 73, 158, 0.6);
+  outline: 0;
+  border: 0;
+  background: url(images/selectarrow.png) right center no-repeat; 
+  background-color: #fff; 
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.blue-button {
+  background: rgba(53, 190, 224, 0.8);
+  border-radius: 6px;
+  height: 40px;
+  width: 250px;
+  color: #FFF;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.green-button {
+  background: rgba(24, 206, 187, 0.8);
+  border-radius: 6px;
+  height: 40px;
+  width: 250px;
+  color: #FFF;
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .loading {
   width: 100%;
   height: 100vh;
@@ -44,6 +105,21 @@ button {
   padding: 0 10%;
   border-bottom: 1px solid rgba(89, 73, 158, 0.2);
   background-image: linear-gradient(#d3cbf4, #FFF);
+}
+
+.header-loggedin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-loggedin > * {
+  margin-left: 20px;
+}
+
+.header-loggedin > img {
+  width: 50px;
+  border-radius: 50%;
 }
 
 .header-logo {
@@ -84,13 +160,6 @@ button {
 }
 
 .header-login-signup > button {
-  background: rgba(53, 190, 224, 0.8);
-  border-radius: 6px;
-  height: 40px;
-  width: 250px;
-  color: #FFF;
-  font-weight: 600;
-  font-size: 14px;
   margin-left: 20px;
 }
 
@@ -127,8 +196,224 @@ button {
 .post {
   cursor: pointer;
   margin: 5% 0;
+  height: 300px;
   background: rgba(176, 165, 223, 0.1);
   border-radius: 4px;
+  display: flex;
+}
+
+.post-pic {
+  width: 33%;
+  background: center center/cover;
+}
+
+.post-content {
+  width: 62%;
+  height: 100%;
+  padding: 0 2.5%;
+  position: relative;
+}
+
+.post-content > button {
+  width: 35%;
+  position: absolute;
+  right: 2.5%;
+  bottom: 5%;
+}
+
+.post-content:hover {
+  background: rgba(176, 165, 223, 0.3);
+}
+
+.post-title {
+  color: rgba(89, 73, 158, 0.6);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+  display: inline-block;
+}
+
+.posted-by {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(89, 73, 158, 0.6);
+  display: inline-block;
+  margin-left: 3%;
+}
+
+.posted-by > span {
+  font-weight: 500;
+  color: rgba(117, 117, 117, 0.8);
+}
+
+.post-subheader {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(89, 73, 158, 0.6);
+}
+
+.post-desc {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(117, 117, 117, 0.8);
+  margin: 0;
+}
+
+.post-desc:last-of-type {
+  max-width: 60%;
+}
+
+.bookmark {
+  position: absolute;
+  right: 11%;
+  margin-top: 1%;
+  height: 25px;
+}
+
+.bookmark:hover {
+  filter: brightness(1.5);
+}
+
+.login, .register {
+  display: flex;
+}
+
+.welcome {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(#d3cbf4, #FFF);
+}
+
+.welcome > img {
+  position: absolute;
+}
+
+.welcome > div {
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+  line-height: 28px;
+  color: #757575;
+}
+
+.welcome > div > * {
+  margin-bottom: 4%;
+  z-index: 1;
+}
+
+.welcome-logo {
+  width: 160px;
+}
+
+.register-main {
+  width: 28%;
+  padding: 1% 11%;
+  overflow: hidden;
+}
+
+.reg-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.upload-userpic {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg-form > img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.reg-form > input, .reg-form > button {
+  width: 95%;
+}
+
+.accept-terms {
+  width: calc(100% - 35px);
+  margin-left: 10px !important;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(89, 73, 158, 0.6);
+}
+
+.accept-terms > span {
+  color: #26A1DA;
+  margin-left: 5px;
+}
+
+.accept-terms > span:hover {
+  box-shadow: 0 1px 0 #26A1DA;
+  cursor: pointer;
+}
+
+.upload-userpic > p {
+  margin-left: 30px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(89, 73, 158, 0.6);
+}
+
+.login-main {
+  width: 28%;
+  padding: 10% 11%;
+}
+
+.login-form {
+  display: flex;
+  flex-flow: column;
+}
+
+.login-form > *, .reg-form > * {
+  margin: 5% 0;
+}
+
+.login-form > button {
+  width: 100%;
+}
+
+.login-main > button, .register-main > button {
+  width: 100%;
+}
+
+.forgotpw {
+  font-size: 14px;
+  align-self: flex-end;
+  margin-top: 0;
+  cursor: pointer;
+  color: #323232;
+}
+
+.forgotpw:hover {
+  box-shadow: 0 1px 0 #59499E;
+}
+
+.page-title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: .5px;
+  color: #5DCBE6;
+}
+
+.bgpaw-corner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .footer {
@@ -141,4 +426,10 @@ button {
 
 .footer > img {
   margin: 0 3px;
+}
+
+@keyframes click {
+  0% {transform: scale(1);}
+  50% {transform: scale(.95);}
+  100% {transform: scale(1);}
 }

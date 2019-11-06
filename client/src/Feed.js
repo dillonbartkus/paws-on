@@ -1,21 +1,17 @@
 import React from 'react'
-import test from './images/pic.png'
+import Post from './Post'
 
-export default function() {
+export default function Feed({ feedData, isLoggedIn }) {
 
-    return(
+    if(feedData) return(
 
         <div className = 'feed'>
 
-            <p>Welcome! Here is a list of Lost and Found Cats. Would you like to post a lost or found cat? Create an account to share your post with everyone!</p>
+            {!isLoggedIn && <p>Welcome! Here is a list of Lost and Found Cats. Would you like to post a lost or found cat? Create an account to share your post with everyone!</p> }
 
             <h2>Lost and Found Cats Posted</h2>
             
-            <div className = 'post'>
-
-                <img src = {test} alt = '' />
-
-            </div>
+            {feedData.map( (post, id) => <Post post = {post} isLoggedIn = {isLoggedIn} key = {id} /> )}
 
         </div>
     )

@@ -1,0 +1,4 @@
+INSERT INTO users (email, name, password, city, avatar) VALUES ('dillonbartkus@gmail.com', 'Dillon Bartkus', 'admin', 'New York City', 'https://i.imgur.com/PQLWrSo.jpg'),
+('maribelortegac@gmail.com','Maribel Ortega','admin','New York City','https://i.imgur.com/IiLJNd5.jpg' );
+
+INSERT INTO posts (author_id, title, date_posted, address, description, picture_one, picture_two, picture_three) VALUES ('1','Injured Female Cat on Ainslie st, Williamsburg','November 20, 2018','231 Ainslie St, Brooklyn, NY 11211','We found this poor girl on our way home from church. She only has one eye, which is covered in gunk. She has some loose skin hanging from her belly. She seemed pretty friendly, approached us and meowed, but ran off before we could call a cab. She needs medical attention badly!','https://i.imgur.com/xfIZKpw.jpg','','');
