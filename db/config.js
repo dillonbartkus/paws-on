@@ -5,6 +5,7 @@ const options = {
 };
 
 const pgp = require('pg-promise')(options);
+const {host, user, database, password, port} = require('./dbvars')
 
 let db;
 
@@ -16,11 +17,11 @@ let db;
 //   });
 // } else if (process.env.NODE_ENV === 'production') {
   db = pgp({
-    host     : 'paws-db.c47j7xajgzkn.us-east-2.rds.amazonaws.com',
-    user     : 'postgres',
-    database : 'paws',
-    password : 'postgres',
-    port     : 5432
+    host     : host,
+    user     : user,
+    database : database,
+    password : password,
+    port     : port
   })
 // }
 

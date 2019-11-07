@@ -8,9 +8,8 @@ controller.login = async (req, res) => {
 
   try {    
     const data = await Paws.findUser(email)
-    const passwordIsCorrect = await checkPassword(pw, data.password)
-    
-    if(passwordIsCorrect) {      
+    const passwordIsCorrect = await checkPassword(pw, data.password)    
+    if(passwordIsCorrect) {
         const token = await genToken(data)
         res.json({
           data: data,

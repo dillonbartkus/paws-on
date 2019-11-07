@@ -5,6 +5,7 @@ import Feed from './Feed'
 import Footer from './Footer'
 import Login from './Login'
 import Register from './Register'
+import SERVERURL from './config'
 
 export default function Main({ feedData }) {
 
@@ -20,7 +21,7 @@ export default function Main({ feedData }) {
     })
 
     const getUserBookmarks = async data => {  // fetches boomarked posts of user and saves as an array
-        const res = await axios.post(`/getUserBookmarks/${data.id}`)
+        const res = await axios.post(`${SERVERURL}/getUserBookmarks/${data.id}`)
         setUserBookmarks(res.data.data[0].array)
     }
     

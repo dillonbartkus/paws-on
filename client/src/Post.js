@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import bookmark from './images/bookmark.png'
+import SERVERURL from './config'
 
 export default function Post({ post, isLoggedIn }) {
 
@@ -8,14 +9,14 @@ export default function Post({ post, isLoggedIn }) {
     const [posterEmail, setPosterEmail] = useState()
 
     const getPosterInfo = async () => {
-        const res = await axios.post(`/post/${post.author_id}`)
+        const res = await axios.post(`${SERVERURL}/post/${post.author_id}`)
         setPosterEmail(res.data.data.email)
         setPosterName(res.data.data.name)
     }
 
     useEffect( () => {
         getPosterInfo()
-    }, [])    
+    })    
 
     return(
 

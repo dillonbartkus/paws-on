@@ -340,8 +340,7 @@ select {
 
 .register-main {
   width: 28%;
-  padding: 1% 11%;
-  overflow: hidden;
+  padding: 0 11%;
 }
 
 .reg-form {
@@ -404,6 +403,7 @@ select {
 .login-form {
   display: flex;
   flex-flow: column;
+  position: relative;
 }
 
 .login-form > *, .reg-form > * {
@@ -416,6 +416,12 @@ select {
 
 .login-main > button, .register-main > button {
   width: 100%;
+}
+
+.invalidcred {
+  color: red;
+  position: absolute;
+  bottom: 30%;
 }
 
 .forgotpw {
