@@ -25,10 +25,8 @@ controller.login = async (req, res) => {
 
 controller.createUser = async (req, res) => {
   const { email, name, password, city, avatar } = req.body;
-  console.log(req.body)
   
   const password_digest = await hashPassword(password);
-  console.log(password_digest)
 
   Paws.createUser({
     email,

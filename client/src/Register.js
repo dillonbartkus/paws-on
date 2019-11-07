@@ -3,7 +3,7 @@ import Welcome from './Welcome'
 import ToS from './ToS'
 import axios from 'axios'
 import camera from './images/camera.png'
-
+import SERVERURL from './config'
 
 export default function Register({ registerNewUser }) {
 
@@ -17,7 +17,7 @@ export default function Register({ registerNewUser }) {
         const avatar = ''
         e.preventDefault()
         try {
-            const res = await axios.post(`http://ec2-3-133-114-8.us-east-2.compute.amazonaws.com/register`, {
+            const res = await axios.post(`${SERVERURL}/register`, {
                 email: email,
                 name: name,
                 password: password,

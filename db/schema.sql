@@ -25,5 +25,5 @@ CREATE TABLE IF NOT EXISTS posts(
 CREATE TABLE IF NOT EXISTS bookmarks(
   user_id INTEGER REFERENCES users(id),
   post_id INTEGER REFERENCES posts(id),
-  PRIMARY KEY(user_id, cart_id)
+  PRIMARY KEY(user_id, post_id)
 );
