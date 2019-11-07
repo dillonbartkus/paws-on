@@ -27,7 +27,8 @@ controller.createUser = async (req, res) => {
   const { email, name, password, city, avatar } = req.body;
   
   const password_digest = await hashPassword(password);
-
+  console.log('body', req.body)
+  
   Paws.createUser({
     email,
     name,
@@ -42,7 +43,8 @@ controller.createUser = async (req, res) => {
       });
     })
     .catch(err => {
-      res.status(500).json({ err });
+      console.log(Paws)
+      res.status(500).json({ err })
     });
 }
 

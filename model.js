@@ -13,6 +13,9 @@ model.findUser = email => {
 }
 
 model.createUser = user => {
+  console.log('db user', user)
+  console.log('db', db)
+  
   return db.one(
     `
      INSERT INTO users

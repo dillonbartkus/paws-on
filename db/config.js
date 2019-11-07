@@ -8,20 +8,20 @@ const pgp = require('pg-promise')(options);
 
 let db;
 
-if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
+// if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
+//   db = pgp({
+//     database: 'paws',
+//     port: 5432,
+//     host: 'localhost',
+//   });
+// } else if (process.env.NODE_ENV === 'production') {
   db = pgp({
-    database: 'paws',
-    port: 5432,
-    host: 'localhost',
-  });
-} else if (process.env.NODE_ENV === 'production') {
-  db = pgp({
-    host     : process.env.RDS_HOSTNAME,
-    user     : process.env.RDS_USERNAME,
-    database : process.env.RDS_DB_NAME,
-    password : process.env.RDS_PASSWORD,
-    port     : process.env.RDS_PORT
+    host     : 'paws-db.c47j7xajgzkn.us-east-2.rds.amazonaws.com',
+    user     : 'postgres',
+    database : 'paws',
+    password : 'postgres',
+    port     : 5432
   })
-}
+// }
 
 module.exports = db;
