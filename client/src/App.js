@@ -24,7 +24,7 @@ export default function App() {
     }
   }  
   
-  if(error) return <p>Error. Please refresh.</p>
+  // if(error) return <p>Error. Please refresh.</p>
 
   return(
 

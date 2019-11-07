@@ -17,7 +17,7 @@ export default function Register({ registerNewUser }) {
         const avatar = ''
         e.preventDefault()
         try {
-            const res = await axios.post(`/register`, {
+            const res = await axios.post(`http://ec2-3-133-114-8.us-east-2.compute.amazonaws.com/register`, {
                 email: email,
                 name: name,
                 password: password,
