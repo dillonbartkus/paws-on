@@ -8,7 +8,7 @@ import Register from './Register'
 
 export default function Main({ feedData }) {
 
-    const [display, setDisplay] = useState('register') // sets which component is rendered
+    const [display, setDisplay] = useState('feed') // sets which component is rendered
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userBookmarks, setUserBookmarks] = useState([])
     const [userData, setUserData] = useState({

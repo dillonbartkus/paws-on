@@ -368,6 +368,10 @@ select {
   color: rgba(89, 73, 158, 0.6);
 }
 
+.upload-userpic > p:hover {
+  box-shadow: 0 1px 0 #59499E;
+}
+
 .login-main {
   width: 28%;
   padding: 10% 11%;
