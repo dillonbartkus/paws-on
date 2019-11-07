@@ -9,13 +9,12 @@ const {host, user, database, password, port} = require('./dbvars')
 
 let db;
 
-// if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
-//   db = pgp({
-//     database: 'paws',
-//     port: 5432,
-//     host: 'localhost',
-//   });
-// } else if (process.env.NODE_ENV === 'production') {
+  // db = pgp({
+  //   database: 'paws',
+  //   port: 5432,
+  //   host: 'localhost',
+  // })
+
   db = pgp({
     host     : host,
     user     : user,
@@ -23,6 +22,6 @@ let db;
     password : password,
     port     : port
   })
-// }
+
 
 module.exports = db;

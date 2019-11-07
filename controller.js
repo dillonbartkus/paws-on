@@ -26,7 +26,6 @@ controller.createUser = async (req, res) => {
   const { email, name, password, city, avatar } = req.body;
   
   const password_digest = await hashPassword(password);
-  console.log('body', req.body)
   
   Paws.createUser({
     email,
@@ -49,11 +48,11 @@ controller.createUser = async (req, res) => {
 
 controller.getFeed = async (req, res) => {
 
-  try {
+  try {    
     const data = await Paws.getFeed()
       res.json({
         data: data
-      })
+      })      
   }
 
   catch(err) {

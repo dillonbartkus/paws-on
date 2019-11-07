@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './index.css'
 import axios from 'axios'
-import SERVERURL from './config'
 import Main from './Main'
+import SERVERURL from './config'
 
 export default function App() {
 
@@ -14,8 +14,8 @@ export default function App() {
   }, [])
 
   const fetchFeedData = async () => {    
-    try {
-      const res = await axios.post(`${SERVERURL}/feed`)
+    try {      
+      const res = await axios.post(`${SERVERURL}/feed`)      
       setFeedData(res.data.data)
     }
     catch(err) {
