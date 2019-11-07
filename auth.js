@@ -5,6 +5,8 @@ const SALT_ROUNDS = 11;
 const TOKEN_KEY = 'areallylonggoodkey';
 
 const hashPassword = async (password) => {
+  console.log(password, SALT_ROUNDS)
+  
   const digest = await bcrypt.hash(password, SALT_ROUNDS);
   return digest;
 }

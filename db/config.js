@@ -16,11 +16,11 @@ if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
   });
 } else if (process.env.NODE_ENV === 'production') {
   db = pgp({
-    host     : 'paws-db.c47j7xajgzkn.us-east-2.rds.amazonaws.com',
-    user     : 'postgres',
-    database : 'paws',
-    password : 'postgres',
-    port     : 5432
+    host     : process.env.RDS_HOSTNAME,
+    user     : process.env.RDS_USERNAME,
+    database : process.env.RDS_DB_NAME,
+    password : process.env.RDS_PASSWORD,
+    port     : process.env.RDS_PORT
   })
 }
 
