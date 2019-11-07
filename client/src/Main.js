@@ -8,9 +8,10 @@ import Register from './Register'
 
 export default function Main({ feedData }) {
 
-    const [display, setDisplay] = useState('feed') // sets which component is rendered
+    const [display, setDisplay] = useState('feed') // which component is rendered below header. toggles between feed, profile, login /reg
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [userBookmarks, setUserBookmarks] = useState([])
+    const [newUserToast, setNewUserToast] = useState('false') // toast welcoming new user
     const [userData, setUserData] = useState({
         id: '',
         name: '',
@@ -18,9 +19,8 @@ export default function Main({ feedData }) {
         avatar: ''
     })
 
-    const getUserBookmarks = async data => {
+    const getUserBookmarks = async data => {  // fetches boomarked posts of user and saves as an array
         const res = await axios.post(`/getUserBookmarks/${data.id}`)
-        console.log(res.data.data[0].array)
         setUserBookmarks(res.data.data[0].array)
     }
     
@@ -34,7 +34,21 @@ export default function Main({ feedData }) {
         })
         getUserBookmarks(data)
         setDisplay('feed')
-    }    
+    }
+
+    const registerNewUser = data => {
+        setIsLoggedIn(true)
+        setUserData({
+            id: data.id,
+            name: data.name,
+            city: data.city,
+            avatar: data.avatar
+        })
+        setDisplay('feed')
+        setNewUserToast('true')
+        setTimeout( () => setNewUserToast('fade'), 2500 )
+        setTimeout( () => setNewUserToast('false'), 5000 )
+    }
 
     return(
         
@@ -43,6 +57,8 @@ export default function Main({ feedData }) {
             { display !== 'login' && display !== 'register' &&
             <Header isLoggedIn = {isLoggedIn} userData = {userData} setDisplay = {setDisplay}
             /> }
+
+            <h1 className = {`toast ${newUserToast}`} >Welcome! Thank you for lending a paw :)</h1>
 
             { display === 'feed' &&
             <Feed feedData = {feedData} isLoggedIn = {isLoggedIn}
@@ -53,7 +69,7 @@ export default function Main({ feedData }) {
             /> }
 
             { display === 'register' &&
-            <Register 
+            <Register registerNewUser = {registerNewUser}
             /> }
 
             { display !== 'login' && display !== 'register' &&

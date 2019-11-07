@@ -1,12 +1,35 @@
 import React, { useState } from 'react'
 import Welcome from './Welcome'
 import ToS from './ToS'
+import axios from 'axios'
 import camera from './images/camera.png'
 
 
-export default function() {
+export default function Register({ registerNewUser }) {
 
     const [showToS, setShowToS] = useState(false)
+
+    const submit = async e => {
+        const email = e.currentTarget.childNodes[1].value
+        const password = e.currentTarget.childNodes[2].value
+        const name = e.currentTarget.childNodes[3].value
+        const city = e.currentTarget.childNodes[4].value
+        const avatar = ''
+        e.preventDefault()
+        try {
+            const res = await axios.post(`/register`, {
+                email: email,
+                name: name,
+                password: password,
+                city: city,
+                avatar: avatar
+            })
+            registerNewUser(res.data.data)
+        }
+          catch(err) {
+            console.log(err.message)
+          }
+    }
 
     return(
         
@@ -22,7 +45,7 @@ export default function() {
             <p className = 'page-title'>Create New Account</p>
 
                 <form className = 'reg-form'
-
+                onSubmit = { e => submit(e) }
                 >
                     <div className = 'upload-userpic'>
                         <img src = {camera} alt = '' />

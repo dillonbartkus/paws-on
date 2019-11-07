@@ -117,6 +117,11 @@ select {
   margin-left: 20px;
 }
 
+.header-loggedin > img:first-of-type {
+  width: 25px;
+  cursor: pointer;
+}
+
 .header-loggedin > img {
   width: 50px;
   border-radius: 50%;
@@ -161,6 +166,25 @@ select {
 
 .header-login-signup > button {
   margin-left: 20px;
+}
+
+.toast {
+  width: 50%;
+  margin: 3% auto;
+  color: rgba(24, 206, 187, 0.8);
+  transition: all 2.5s;
+}
+
+.toast.true {
+  opacity: 1;
+}
+
+.toast.fade {
+  opacity: 0;
+}
+
+.toast.false {
+  display: none;
 }
 
 .feed {
@@ -268,13 +292,13 @@ select {
 
 .bookmark {
   position: absolute;
-  right: 11%;
-  margin-top: 1%;
+  right: 3%;
+  top: 5%;
   height: 25px;
 }
 
 .bookmark:hover {
-  filter: brightness(1.5);
+  filter: brightness(1.75);
 }
 
 .login, .register {

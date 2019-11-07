@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './index.css'
 import axios from 'axios'
-import Loading from './Loading'
+// import Loading from './Loading'
 import Main from './Main'
 
 export default function App() {
 
-  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
   const [feedData, setFeedData] = useState()
 
   useEffect( () => {
@@ -17,22 +17,23 @@ export default function App() {
     try {
       const res = await axios.post(`/feed`)      
       setFeedData(res.data.data)
-      setLoading(false)
     }
     catch(err) {
       console.log(err.message)
-      window.location.reload()
+      setError(true)
     }
-  }
+  }  
   
-  return (
+  if(error) return <p>Error. Please refresh.</p>
 
-    <div className = 'App'>
+  return(
 
-      { loading && <Loading /> }
+  <div className = 'App'>
 
-      { !loading && <Main feedData = {feedData} /> }
+    <Main feedData = {feedData} />
 
-    </div>
+  </div>
+
   )
+
 }

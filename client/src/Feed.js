@@ -2,8 +2,8 @@ import React from 'react'
 import Post from './Post'
 
 export default function Feed({ feedData, isLoggedIn }) {
-
-    if(feedData) return(
+    
+    return(
 
         <div className = 'feed'>
 
@@ -11,7 +11,7 @@ export default function Feed({ feedData, isLoggedIn }) {
 
             <h2>Lost and Found Cats Posted</h2>
             
-            {feedData.map( (post, id) => <Post post = {post} isLoggedIn = {isLoggedIn} key = {id} /> )}
+            {feedData && feedData.map( (post, id) => <Post post = {post} isLoggedIn = {isLoggedIn} key = {id} /> )}
 
         </div>
     )

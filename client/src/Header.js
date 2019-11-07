@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './images/pawslogo.png'
 import pawson from './images/pawson.png'
+import arrow from './images/selectarrow.png'
 
 export default function({ isLoggedIn, setDisplay, userData }) {
     
@@ -36,6 +37,8 @@ export default function({ isLoggedIn, setDisplay, userData }) {
             <div className = 'header-loggedin'>
 
                 <p>Hello {userData.name}!</p>
+
+                <img src = {arrow} alt = '' />
 
                 <img src = {userData.avatar} alt = 'user pic' />
 
