@@ -20,6 +20,8 @@ export default function Main({ feedData }) {
         avatar: ''
     })
 
+    const uploadRef = React.createRef()
+
     const getUserBookmarks = async data => {  // fetches boomarked posts of user and saves as an array
         const res = await axios.post(`${SERVERURL}/getUserBookmarks/${data.id}`)
         setUserBookmarks(res.data.data[0].array)
@@ -38,7 +40,7 @@ export default function Main({ feedData }) {
     }
 
     const registerNewUser = data => {
-        setIsLoggedIn(true)
+        setIsLoggedIn(true)        
         setUserData({
             id: data.id,
             name: data.name,
@@ -70,7 +72,7 @@ export default function Main({ feedData }) {
             /> }
 
             { display === 'register' &&
-            <Register registerNewUser = {registerNewUser}
+            <Register registerNewUser = {registerNewUser} uploadRef = {uploadRef}
             /> }
 
             { display !== 'login' && display !== 'register' &&

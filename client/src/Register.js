@@ -4,18 +4,28 @@ import ToS from './ToS'
 import axios from 'axios'
 import camera from './images/camera.png'
 import SERVERURL from './config'
+import keys from './awskeys'
+import aws from 'aws-sdk'
 
-export default function Register({ registerNewUser }) {
+export default function Register({ registerNewUser, uploadRef }) {
 
     const [showToS, setShowToS] = useState(false)
+    const [isUploaded, setIsUploaded] = useState(false)
 
-    const submit = async e => {
-        const email = e.currentTarget.childNodes[1].value
-        const password = e.currentTarget.childNodes[2].value
-        const name = e.currentTarget.childNodes[3].value
-        const city = e.currentTarget.childNodes[4].value
-        const avatar = ''
+    setInterval( () => {
+        if(uploadRef.current && uploadRef.current.value) setIsUploaded(true)}, 500 )
+
+    const submit = e => {
         e.preventDefault()
+        const avatar = uploadImg()
+        createUser(e, avatar)
+    }
+
+    const createUser = async (e, avatar) => {                
+        const email = e.currentTarget.childNodes[2].value
+        const password = e.currentTarget.childNodes[3].value
+        const name = e.currentTarget.childNodes[4].value
+        const city = e.currentTarget.childNodes[5].value
         try {
             const res = await axios.post(`${SERVERURL}/register`, {
                 email: email,
@@ -29,6 +39,44 @@ export default function Register({ registerNewUser }) {
           catch(err) {
             console.log(err.message)
           }
+    }
+
+    const uploadImg = () => {
+
+        const file = uploadRef.current.files[0]
+
+        aws.config.update({
+            accessKeyId: keys.AWSKEY,
+            secretAccessKey: keys.AWSSECRET
+        });
+        
+        const s3 = new aws.S3( {
+            endpoint: 's3-us-east-2.amazonaws.com',
+            signatureVersion: 'v4',
+            region: 'us-east-2'
+        } );
+
+        const params = {
+        Bucket: 'paws-images',
+        Key: file.name,
+        Expires: 60,
+        ContentType: file.type
+    };
+
+    s3.getSignedUrl('putObject', params, function(err, signedUrl) {
+        if (err) {
+            console.log(err);
+            return err;
+        } else {
+            var instance = axios.create()
+
+            instance.put(signedUrl, file, {headers: {'Content-Type': file}})
+                .catch(function (err) {
+                    console.log(err)
+                });
+            }
+        })
+        return `https://${params.Bucket}.${s3.endpoint.host}/${params.Key}`
     }
 
     return(
@@ -47,10 +95,14 @@ export default function Register({ registerNewUser }) {
                 <form className = 'reg-form'
                 onSubmit = { e => submit(e) }
                 >
-                    <div className = 'upload-userpic'>
-                        <img src = {camera} alt = '' />
-                        <p className = 'upload-text'>Upload Profile Picture</p>
+                    <div
+                    onClick = { () => !isUploaded && uploadRef.current.click() }
+                    className = 'upload-userpic'>
+                        {!isUploaded && <img src = {camera} alt = '' /> }
+                        <p className = {`upload-text ${isUploaded}`}>{isUploaded ? 'Uploaded!' : 'Upload Profile Picture'}</p>
                     </div>
+
+                    <input style = {{'display' : 'none'}} ref = {uploadRef} type = 'file' accept = '.jpg, .jpeg, .png'></input>
 
                     <input
                     placeholder = 'Email'

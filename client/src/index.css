@@ -46,7 +46,7 @@ select {
   outline: 0;
   border: 0;
   background-color: #FFF;
-  width: 95%;
+  width: 100%;
   font-size: 20px;
   line-height: 30px;
   color: rgba(89, 73, 158, 0.6);
@@ -338,14 +338,13 @@ select {
   width: 160px;
 }
 
-.register-main {
-  width: 28%;
-  padding: 0 11%;
-}
-
 .reg-form {
   display: flex;
   flex-wrap: wrap;
+}
+
+.reg-form > *, .login-form > * {
+  margin: 5% 0;
 }
 
 .upload-userpic {
@@ -361,12 +360,12 @@ select {
 }
 
 .reg-form > input, .reg-form > button {
-  width: 95%;
+  width: 100%;
 }
 
 .accept-terms {
   width: calc(100% - 35px);
-  margin-left: 10px !important;
+  margin-left: 10px;
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
@@ -383,7 +382,7 @@ select {
   cursor: pointer;
 }
 
-.upload-userpic > p {
+.upload-text {
   margin-left: 30px;
   font-weight: 600;
   font-size: 16px;
@@ -391,23 +390,19 @@ select {
   color: rgba(89, 73, 158, 0.6);
 }
 
-.upload-userpic > p:hover {
+.upload-text.false:hover {
   box-shadow: 0 1px 0 #59499E;
 }
 
-.login-main {
+.login-main, .register-main {
   width: 28%;
-  padding: 10% 11%;
+  margin: auto;
 }
 
 .login-form {
   display: flex;
   flex-flow: column;
   position: relative;
-}
-
-.login-form > *, .reg-form > * {
-  margin: 5% 0;
 }
 
 .login-form > button {
@@ -460,6 +455,12 @@ select {
 
 .footer > img {
   margin: 0 3px;
+}
+
+@media only screen and (min-width: 1300px){
+
+  
+
 }
 
 @keyframes click {

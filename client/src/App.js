@@ -7,15 +7,15 @@ import SERVERURL from './config'
 export default function App() {
 
   const [error, setError] = useState(false)
-  const [feedData, setFeedData] = useState()
+  const [feedData, setFeedData] = useState()  
 
   useEffect( () => {
     fetchFeedData()
   }, [])
 
-  const fetchFeedData = async () => {    
+  const fetchFeedData = async () => {
     try {      
-      const res = await axios.post(`${SERVERURL}/feed`)      
+      const res = await axios.post(`${SERVERURL}/feed`) 
       setFeedData(res.data.data)
     }
     catch(err) {
@@ -24,7 +24,7 @@ export default function App() {
     }
   }  
   
-  if(error) return <p>Error. Please refresh.</p>
+  // if(error) return <p>Error. Please refresh.</p>
 
   return(
 

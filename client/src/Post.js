@@ -30,7 +30,7 @@ export default function Post({ post, isLoggedIn }) {
                 onClick = { e => {
                     e.stopPropagation()
                 }}
-                src = {bookmark} className = 'bookmark' /> }
+                src = {bookmark} className = 'bookmark' alt = 'bookmark' /> }
 
                 <p className = 'post-title'>{post.title}</p>
 

@@ -8,14 +8,14 @@ import corner from './images/paws-bg-corner.png'
 export default function() {
 
     const generateRandomPosition = () => {
-        const randomTop = Math.random() * window.innerHeight + "px";
-        const randomLeft = Math.random() * (window.innerWidth / 2 - 60) + "px";        
+        const randomTop = Math.random() * window.innerHeight - 90 + "px";        
+        const randomLeft = Math.random() * (window.innerWidth / 2 - 90) + "px";           
     
         return {
             top : randomTop,
             left : randomLeft
         }
-    }
+    }    
 
     return(
         <div className = 'welcome'>

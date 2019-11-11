@@ -7,7 +7,7 @@ controller.login = async (req, res) => {
   const { pw, email } = req.body;
 
   try {    
-    const data = await Paws.findUser(email)
+    const data = await Paws.findUser(email, pw)
     const passwordIsCorrect = await checkPassword(pw, data.password)    
     if(passwordIsCorrect) {
         const token = await genToken(data)
@@ -15,6 +15,8 @@ controller.login = async (req, res) => {
           data: data,
           token: token
         })
+      } else {
+        res.status(500).json({ err })
       }
     }
     catch(err) {
@@ -41,7 +43,6 @@ controller.createUser = async (req, res) => {
       });
     })
     .catch(err => {
-      console.log(Paws)
       res.status(500).json({ err })
     });
 }

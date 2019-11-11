@@ -2,13 +2,14 @@ const db = require('./db/config')
 
 const model = {}
 
-model.findUser = email => {
+model.findUser = (email, pw) => {
   return db.oneOrNone(
     `
     SELECT * FROM users
-    WHERE users.email = $1
+    WHERE email = $1
+    AND password = $2
     `,
-    [email]
+    [email, password]
   )
 }
 
