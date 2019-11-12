@@ -76,6 +76,7 @@ select {
   color: #FFF;
   font-weight: 600;
   font-size: 14px;
+  letter-spacing: .5px;
 }
 
 .loading {
@@ -100,6 +101,7 @@ select {
 .header {
   height: 100px;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-between;
   padding: 0 10%;
@@ -118,13 +120,43 @@ select {
 }
 
 .header-loggedin > img:first-of-type {
-  width: 25px;
+  width: 20px;
   cursor: pointer;
 }
 
-.header-loggedin > img {
-  width: 50px;
+.header-loggedin > img:last-of-type {
+  width: 45px;
+  height: 50px;
   border-radius: 50%;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 101px;
+  right: auto;
+  margin: 0 auto;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}
+
+.user-dropdown > * {
+  margin: 0;
+  padding: 12.5px 20px;
+}
+
+.user-dropdown > *:hover {
+  cursor: pointer;
+  color: #FFF;
+  background: #59499E;
+}
+
+.user-dropdown.false {
+  display: none;
+}
+
+.user-dropdown.false > * {
+  opacity: 0;
 }
 
 .header-logo {
@@ -168,8 +200,13 @@ select {
   margin-left: 20px;
 }
 
+.lostfound.false {
+  visibility: hidden;
+}
+
 .toast {
-  width: 50%;
+  position: absolute;
+  top: -4%;
   margin: 3% auto;
   color: rgba(24, 206, 187, 0.8);
   transition: all 2.5s;
@@ -191,6 +228,7 @@ select {
   width: 80%;
   min-height: calc(100vh - 200px);
   margin: 4% auto;
+  position: relative;
 }
 
 .feed > p {
@@ -239,7 +277,7 @@ select {
 }
 
 .post-content > button {
-  width: 35%;
+  width: 250px;
   position: absolute;
   right: 2.5%;
   bottom: 5%;
@@ -281,7 +319,7 @@ select {
 .post-desc {
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 19px;
   color: rgba(117, 117, 117, 0.8);
   margin: 0;
 }
@@ -294,11 +332,22 @@ select {
   position: absolute;
   right: 3%;
   top: 5%;
-  height: 25px;
+  height: 30px;
+  width: 25px;
+  background-repeat: no-repeat;
+  transition: all .5s;
+}
+
+.bookmark.false {
+  background-image: url(images/bookmark.png);
+}
+
+.bookmark.true {
+  background-image: url(images/bookmarked.png);
 }
 
 .bookmark:hover {
-  filter: brightness(1.75);
+  filter: brightness(1.33);
 }
 
 .login, .register {
@@ -341,10 +390,16 @@ select {
 .reg-form {
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .reg-form > *, .login-form > * {
   margin: 5% 0;
+}
+
+.reg-form > input[type="file"] {
+  position: absolute;
+  opacity: 0;
 }
 
 .upload-userpic {
@@ -394,8 +449,12 @@ select {
   box-shadow: 0 1px 0 #59499E;
 }
 
+.upload-text.true {
+  margin-left: 0;
+}
+
 .login-main, .register-main {
-  width: 28%;
+  width: 400px;
   margin: auto;
 }
 
@@ -459,12 +518,44 @@ select {
 
 @media only screen and (min-width: 1300px){
 
-  
+  .green-button {
+    font-size: 16px;
+  }
+
+  .post-subheader {
+    font-size: 18px;
+  }
+
+  .post-desc {
+    font-size: 16px;
+  }
+
+  .post-content > button {
+    /* width: 25%; */
+  }
+
+}
+
+@media only screen and (max-width: 950px){
+
+  .welcome {
+    display: none;
+  }
+
+  .login, .register {
+    height: 100vh;
+  }
 
 }
 
 @keyframes click {
   0% {transform: scale(1);}
   50% {transform: scale(.95);}
+  100% {transform: scale(1);}
+}
+
+@keyframes bookmark {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.5);}
   100% {transform: scale(1);}
 }

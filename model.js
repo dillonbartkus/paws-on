@@ -28,7 +28,10 @@ model.createUser = user => {
 
 model.getFeed = () => {
   return db.query(
-    `SELECT * FROM posts`
+    `
+    SELECT * FROM posts
+    ORDER BY id DESC
+    `
   )
 }
 
@@ -51,6 +54,17 @@ model.getUserBookmarks = id => {
     WHERE user_id = $1)
     `,
     id
+  )
+}
+
+model.addBookmark = (post_id, user_id) => {
+  return db.one(
+    `
+    INSERT INTO bookmarks
+    (post_id, user_id)
+    VALUES ($1, $2)
+    `,
+    [post_id, user_id]
   )
 }
 

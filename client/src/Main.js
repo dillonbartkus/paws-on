@@ -1,83 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Header from './Header'
 import Feed from './Feed'
 import Footer from './Footer'
-import Login from './Login'
-import Register from './Register'
+import PostDetails from './PostDetails'
+import Profile from './Profile'
 import SERVERURL from './config'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+  } from "react-router-dom"
 
-export default function Main({ feedData }) {
+export default function Main(props) {
 
-    const [display, setDisplay] = useState('feed') // which component is rendered below header. toggles between feed, profile, login /reg
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const { feedData, newUserToast } = props
+    
     const [userBookmarks, setUserBookmarks] = useState([])
-    const [newUserToast, setNewUserToast] = useState('false') // toast welcoming new user
-    const [userData, setUserData] = useState({
-        id: '',
-        name: '',
-        city: '',
-        avatar: ''
-    })
+    const [userDropdown, setUserDropdown] = useState(false)
 
-    const uploadRef = React.createRef()
+    useEffect( () => {
+        if(localStorage.pawsId) getUserBookmarks()
+    }, [])
 
     const getUserBookmarks = async data => {  // fetches boomarked posts of user and saves as an array
-        const res = await axios.post(`${SERVERURL}/getUserBookmarks/${data.id}`)
+        const res = await axios.post(`${SERVERURL}/getUserBookmarks/${localStorage.pawsId}`)
+        console.log(res.data.data)
         setUserBookmarks(res.data.data[0].array)
-    }
-    
-    const logUserIn = data => {
-        setIsLoggedIn(true)
-        setUserData({
-            id: data.id,
-            name: data.name,
-            city: data.city,
-            avatar: data.avatar
-        })
-        getUserBookmarks(data)
-        setDisplay('feed')
-    }
-
-    const registerNewUser = data => {
-        setIsLoggedIn(true)        
-        setUserData({
-            id: data.id,
-            name: data.name,
-            city: data.city,
-            avatar: data.avatar
-        })
-        setDisplay('feed')
-        setNewUserToast('true')
-        setTimeout( () => setNewUserToast('fade'), 2500 )
-        setTimeout( () => setNewUserToast('false'), 5000 )
     }
 
     return(
         
-        <div className = 'main'>
+        <div
+        onClick = { () => userDropdown && setUserDropdown(false) }
+        className = 'main'>
 
-            { display !== 'login' && display !== 'register' &&
-            <Header isLoggedIn = {isLoggedIn} userData = {userData} setDisplay = {setDisplay}
-            /> }
+            <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
 
-            <h1 className = {`toast ${newUserToast}`} >Welcome! Thank you for lending a paw :)</h1>
+            <Router>
+                <Switch>
+                    <Route
+                    path='/post/:id'
+                    render={ (props) => <PostDetails {...props} feedData = {feedData} />}
+                    />
+                    <Route
+                    path='/profile'
+                    render={ () => <Profile />}
+                    />
+                    <Route
+                    path='/'
+                    render={ () => <Feed feedData = {feedData} newUserToast = {newUserToast} userBookmarks = {userBookmarks} /> }
+                    />
 
-            { display === 'feed' &&
-            <Feed feedData = {feedData} isLoggedIn = {isLoggedIn}
-            /> }
+                </Switch>
+            </Router>
 
-            { display === 'login' &&
-            <Login setDisplay = {setDisplay} logUserIn = {logUserIn}
-            /> }
+            {/* <Feed feedData = {feedData} userBookmarks = {userBookmarks} /> */}
 
-            { display === 'register' &&
-            <Register registerNewUser = {registerNewUser} uploadRef = {uploadRef}
-            /> }
-
-            { display !== 'login' && display !== 'register' &&
-            <Footer 
-            /> }
+            <Footer />
 
         </div>
     )

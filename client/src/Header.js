@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from './images/pawslogo.png'
 import pawson from './images/pawson.png'
 import arrow from './images/selectarrow.png'
+import { Redirect } from 'react-router-dom'
 
-export default function({ isLoggedIn, setDisplay, userData }) {
+export default function({ userDropdown, setUserDropdown }) {
+
+    const [redirectToLogin, setRedirectToLogin] = useState(false)
+    const [redirectToRegister, setRedirectToRegister] = useState(false)
+
+    const { pawsId, pawsUser, pawsAvatar } = localStorage
     
     return(
 
@@ -17,32 +23,47 @@ export default function({ isLoggedIn, setDisplay, userData }) {
 
             </div>
 
-            {!isLoggedIn &&
+            {!pawsId &&
             <div className = 'header-login-signup'>
 
                 <p
-                onClick = { () => setDisplay('login') } >
+                onClick = { () => setRedirectToLogin(true) }
+                >
                 Log In</p>
 
                 OR
 
                 <button
                 className = 'blue-button'
-                onClick = { () => setDisplay('register') } >
+                onClick = { () => setRedirectToRegister(true) } >
                 Create New Account</button>
 
             </div> }
 
-            {isLoggedIn &&
+            {pawsId &&
             <div className = 'header-loggedin'>
 
-                <p>Hello {userData.name}!</p>
+                <p>Hello {pawsUser}!</p>
 
-                <img src = {arrow} alt = '' />
+                <img
+                onClick = { () => setUserDropdown(!userDropdown) }
+                src = {arrow} alt = '' />
 
-                <img src = {userData.avatar} alt = 'user pic' />
+                <img src = {pawsAvatar} alt = 'user pic' />
+
+                <div className = {`user-dropdown ${userDropdown}`}>
+                    <p>Profile</p>
+                    <p>Bookmarked</p>
+                    <p>Find Shelters</p>
+                </div>
 
             </div> }
+
+            {redirectToLogin &&
+            <Redirect push to='/login' />}
+
+            {redirectToRegister && 
+            <Redirect push to='/register' />}
 
         </div>
     )

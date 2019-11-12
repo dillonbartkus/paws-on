@@ -4,13 +4,18 @@ import ToS from './ToS'
 import axios from 'axios'
 import camera from './images/camera.png'
 import SERVERURL from './config'
+import setUserData from './lib/setUserData'
+import { Redirect } from 'react-router-dom'
 import keys from './awskeys'
 import aws from 'aws-sdk'
 
-export default function Register({ registerNewUser, uploadRef }) {
+export default function Register({ showToast }) {
+
+    const uploadRef = React.createRef()
 
     const [showToS, setShowToS] = useState(false)
     const [isUploaded, setIsUploaded] = useState(false)
+    const [redirectToFeed, setRedirectToFeed] = useState(false)
 
     setInterval( () => {
         if(uploadRef.current && uploadRef.current.value) setIsUploaded(true)}, 500 )
@@ -34,7 +39,8 @@ export default function Register({ registerNewUser, uploadRef }) {
                 city: city,
                 avatar: avatar
             })
-            registerNewUser(res.data.data)
+            setUserData(res.data.data)
+            setRedirectToFeed(true)
         }
           catch(err) {
             console.log(err.message)
@@ -102,7 +108,7 @@ export default function Register({ registerNewUser, uploadRef }) {
                         <p className = {`upload-text ${isUploaded}`}>{isUploaded ? 'Uploaded!' : 'Upload Profile Picture'}</p>
                     </div>
 
-                    <input style = {{'display' : 'none'}} ref = {uploadRef} type = 'file' accept = '.jpg, .jpeg, .png'></input>
+                    <input ref = {uploadRef} type = 'file' accept = '.jpg, .jpeg, .png' required></input>
 
                     <input
                     placeholder = 'Email'
@@ -139,6 +145,13 @@ export default function Register({ registerNewUser, uploadRef }) {
                 </form>
 
             </div>
+
+            {redirectToFeed && 
+            <Redirect push to={{
+                    pathname: "/",
+                    state: { showToast: showToast() }
+                }}
+            /> }
 
         </div>
     )

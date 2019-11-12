@@ -13,4 +13,6 @@ router.post('/post/:id', controller.getPostInfo)
 
 router.post('/getuserbookmarks/:id', controller.getUserBookmarks)
 
+router.post('/addbookmark/:id', controller.addBookmark)
+
 module.exports = router

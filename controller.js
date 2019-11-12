@@ -91,4 +91,20 @@ controller.getUserBookmarks = async (req, res) => {
   } 
 }
 
+controller.addBookmark = async (req, res) => {
+  const user_id = req.params.id
+  const {post_id} = req.body
+
+  try {
+    const data = await Paws.addBookmark({post_id}, user_id)
+      res.json({
+        data: data
+      })
+  }
+
+  catch(err) {
+    res.status(500).json({ err })
+  } 
+}
+
 module.exports = controller;

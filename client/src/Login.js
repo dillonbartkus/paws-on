@@ -2,26 +2,31 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Welcome from './Welcome'
 import SERVERURL from './config'
+import setUserData from './lib/setUserData'
+import { Redirect } from 'react-router-dom'
 
-export default function({ setDisplay, logUserIn }) {
-
+export default function Login() {
+    
     const [invalidCred, setInvalidCred] = useState(false)
+    const [redirectToRegister, setRedirectToRegister] = useState(false)
+    const [redirectToFeed, setRedirectToFeed] = useState(false)
 
     const checkCredentials = async e => {
         const email = e.currentTarget.childNodes[0].value
         const pw = e.currentTarget.childNodes[1].value
         e.preventDefault()
         try {
-        const res = await axios.post(`${SERVERURL}/login`, {
-            email: email,
-            pw: pw
-          })          
-          await logUserIn(res.data.data)
+            const res = await axios.post(`${SERVERURL}/login`, {
+                email: email,
+                pw: pw
+            })          
+            setUserData(res.data.data)
+            setRedirectToFeed(true)
         }
-          catch(err) {
+        catch(err) {
             console.log(err.message)
             setInvalidCred(true)
-          }
+        }
     }
 
     return(
@@ -60,10 +65,16 @@ export default function({ setDisplay, logUserIn }) {
                 </form>
 
                 <button className = 'blue-button'
-                onClick = { () => setDisplay('register') }
+                onClick = { () => setRedirectToRegister(true) }
                 >Create New Account</button>
 
             </div>
+
+            {redirectToRegister && 
+            <Redirect push to='/register' />}
+
+            {redirectToFeed && 
+            <Redirect push to='/' />}
 
         </div>
     )
