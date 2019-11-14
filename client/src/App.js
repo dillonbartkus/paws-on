@@ -23,7 +23,7 @@ export default function App() {
 
   const fetchFeedData = async () => {
     try {      
-      const res = await axios.post(`${SERVERURL}/feed`)
+      const res = await axios.post(`http://localhost:8080/feed`)
       setFeedData(res.data.data)
     }
     catch(err) {

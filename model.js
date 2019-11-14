@@ -2,14 +2,13 @@ const db = require('./db/config')
 
 const model = {}
 
-model.findUser = (email, pw) => {
+model.findUser = email => {
   return db.oneOrNone(
     `
     SELECT * FROM users
     WHERE email = $1
-    AND password = $2
     `,
-    [email, password]
+    [email]
   )
 }
 
@@ -30,7 +29,6 @@ model.getFeed = () => {
   return db.query(
     `
     SELECT * FROM posts
-    ORDER BY id DESC
     `
   )
 }
@@ -63,6 +61,17 @@ model.addBookmark = (post_id, user_id) => {
     INSERT INTO bookmarks
     (post_id, user_id)
     VALUES ($1, $2)
+    RETURNING *
+    `,
+    [post_id, user_id]
+  )
+}
+
+model.removeBookmark = (post_id, user_id) => {
+  return db.none(
+    `
+    DELETE FROM bookmarks
+    WHERE post_id = $1 AND user_id = $2
     `,
     [post_id, user_id]
   )

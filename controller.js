@@ -7,7 +7,8 @@ controller.login = async (req, res) => {
   const { pw, email } = req.body;
 
   try {    
-    const data = await Paws.findUser(email, pw)
+    const data = await Paws.findUser(email)
+    
     const passwordIsCorrect = await checkPassword(pw, data.password)    
     if(passwordIsCorrect) {
         const token = await genToken(data)
@@ -93,12 +94,28 @@ controller.getUserBookmarks = async (req, res) => {
 
 controller.addBookmark = async (req, res) => {
   const user_id = req.params.id
-  const {post_id} = req.body
+  const {post_id} = req.body  
 
   try {
-    const data = await Paws.addBookmark({post_id}, user_id)
+    const data = await Paws.addBookmark(post_id, user_id)    
       res.json({
         data: data
+      })
+  }
+
+  catch(err) {
+    res.status(500).json({ err })
+  } 
+}
+
+controller.removeBookmark = async (req, res) => {
+  const {post_id, user_id} = req.body
+
+  try {
+    const data = await Paws.removeBookmark(post_id, user_id)
+      res.json({
+        data: data,
+        message: 'deleted'
       })
   }
 

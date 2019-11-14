@@ -3,27 +3,41 @@ import axios from 'axios'
 import SERVERURL from './config'
 import { Redirect } from 'react-router-dom'
 
-export default function Post({ post, bookmarked }) {
+export default function Post({ post, userBookmarks }) {
 
     const [posterName, setPosterName] = useState()
     const [posterEmail, setPosterEmail] = useState()
-    const [isBookmarked, setIsBookmarked] = useState(bookmarked ? true : false)
+    const [isBookmarked, setIsBookmarked] = useState(false)
     const [redirectToPost, setRedirectToPost] = useState(false)
 
-    const getPosterInfo = async () => {
-        const res = await axios.post(`${SERVERURL}/post/${post.author_id}`)
-        setPosterEmail(res.data.data.email)
-        setPosterName(res.data.data.name)
-    }
+    useEffect( () => {
+
+        const getPosterAuthor = async () => {
+            const res = await axios.post(`http://localhost:8080/post/${post.author_id}`)
+            setPosterEmail(res.data.data.email)
+            setPosterName(res.data.data.name)
+        }
+
+        getPosterAuthor()
+    }, [posterEmail, posterName, post.author_id])
+
+    useEffect( () => {        
+        if(userBookmarks.filter( bm => bm === post.id ).length) setIsBookmarked(true)
+    }, [userBookmarks, post.id])
 
     const addBookmark = async () => {
-        const res = await axios.post(`${SERVERURL}/addbookmark/${post.id}`)
-        console.log(res)
+        await axios.post(`http://localhost:8080/addbookmark/${localStorage.pawsId}`, {
+            post_id: post.id
+        })
     }
-    
-    useEffect( () => {
-        getPosterInfo()
-    }, [])    
+
+    const removeBookmark = async () => {
+        const data = {
+            user_id: localStorage.pawsId,
+            post_id : post.id
+        }
+        await axios.delete(`http://localhost:8080/removebookmark`, {data: data})
+    }   
 
     return(
 
@@ -34,9 +48,11 @@ export default function Post({ post, bookmarked }) {
             <div className = 'post-content'>
 
                 {localStorage.pawsId && <div
-                onClick = { () => {
+                onClick = { async e => {
+                    e.stopPropagation()                    
+                    if(!isBookmarked) await addBookmark()
+                    if(isBookmarked) await removeBookmark()
                     setIsBookmarked(!isBookmarked)
-                    addBookmark()
                 }}
                  className = {`bookmark ${isBookmarked}`}> </div> }
 

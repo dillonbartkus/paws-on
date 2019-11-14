@@ -21,6 +21,10 @@ button:focus {
   animation: click .25s;
 }
 
+button:hover {
+  filter: brightness(1.1);
+}
+
 input {
   border: none;
   outline: none;
@@ -79,7 +83,7 @@ select {
   letter-spacing: .5px;
 }
 
-.loading {
+/* .loading {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -96,7 +100,7 @@ select {
 
 .loading.fade {
   left: -100%
-}
+} */
 
 .header {
   height: 100px;
@@ -125,12 +129,13 @@ select {
 }
 
 .header-loggedin > img:last-of-type {
-  width: 45px;
-  height: 50px;
-  border-radius: 50%;
+  width: 60px;
+  height: 66px;
+  border-radius: 50px;
 }
 
 .user-dropdown {
+  z-index: 1;
   position: absolute;
   top: 101px;
   right: auto;
@@ -335,7 +340,7 @@ select {
   height: 30px;
   width: 25px;
   background-repeat: no-repeat;
-  transition: all .5s;
+  transition: all .25s;
 }
 
 .bookmark.false {
@@ -344,6 +349,7 @@ select {
 
 .bookmark.true {
   background-image: url(images/bookmarked.png);
+  animation: bookmark .5s;
 }
 
 .bookmark:hover {
@@ -416,6 +422,35 @@ select {
 
 .reg-form > input, .reg-form > button {
   width: 100%;
+}
+
+.tos {
+  position: absolute;
+  z-index: 2;
+  background: #FFF;
+  overflow: scroll;
+  width: 55%;
+  height: 100vh;
+  margin: 0 22%;
+  padding: 0 5%;
+  outline: 1px solid rgba(89, 73, 158, 0.6);
+}
+
+.tos > p {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.5px;
+  color: #59499E;
+}
+
+.close-tos {
+  color: gray;
+  display: inline;
+  font-size: 30px;
+  position: relative;
+  left: 100%;
+  top: 10px;
+  cursor: pointer;
 }
 
 .accept-terms {
@@ -556,6 +591,6 @@ select {
 
 @keyframes bookmark {
   0% {transform: scale(1);}
-  50% {transform: scale(1.5);}
+  50% {transform: scale(1.25);}
   100% {transform: scale(1);}
 }

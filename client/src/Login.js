@@ -15,11 +15,11 @@ export default function Login() {
         const email = e.currentTarget.childNodes[0].value
         const pw = e.currentTarget.childNodes[1].value
         e.preventDefault()
-        try {
-            const res = await axios.post(`${SERVERURL}/login`, {
+        try {            
+            const res = await axios.post(`http://localhost:8080/login`, {
                 email: email,
                 pw: pw
-            })          
+            })            
             setUserData(res.data.data)
             setRedirectToFeed(true)
         }

@@ -16,18 +16,7 @@ export default function Main(props) {
 
     const { feedData, newUserToast } = props
     
-    const [userBookmarks, setUserBookmarks] = useState([])
     const [userDropdown, setUserDropdown] = useState(false)
-
-    useEffect( () => {
-        if(localStorage.pawsId) getUserBookmarks()
-    }, [])
-
-    const getUserBookmarks = async data => {  // fetches boomarked posts of user and saves as an array
-        const res = await axios.post(`${SERVERURL}/getUserBookmarks/${localStorage.pawsId}`)
-        console.log(res.data.data)
-        setUserBookmarks(res.data.data[0].array)
-    }
 
     return(
         
@@ -49,13 +38,11 @@ export default function Main(props) {
                     />
                     <Route
                     path='/'
-                    render={ () => <Feed feedData = {feedData} newUserToast = {newUserToast} userBookmarks = {userBookmarks} /> }
+                    render={ () => <Feed feedData = {feedData} newUserToast = {newUserToast} /> }
                     />
 
                 </Switch>
             </Router>
-
-            {/* <Feed feedData = {feedData} userBookmarks = {userBookmarks} /> */}
 
             <Footer />
 

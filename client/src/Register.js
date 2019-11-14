@@ -32,7 +32,7 @@ export default function Register({ showToast }) {
         const name = e.currentTarget.childNodes[4].value
         const city = e.currentTarget.childNodes[5].value
         try {
-            const res = await axios.post(`${SERVERURL}/register`, {
+            const res = await axios.post(`http://localhost:8080/register`, {
                 email: email,
                 name: name,
                 password: password,
@@ -90,7 +90,7 @@ export default function Register({ showToast }) {
         <div className = 'register'>
 
             {showToS &&
-            <ToS /> }
+            <ToS show = {setShowToS} /> }
 
             <Welcome />
 
