@@ -148,7 +148,7 @@ export default function Register({ showToast }) {
 
             {redirectToFeed && 
             <Redirect push to={{
-                    pathname: "/",
+                    pathname: '/',
                     state: { showToast: showToast() }
                 }}
             /> }

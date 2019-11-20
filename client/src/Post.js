@@ -50,8 +50,8 @@ export default function Post({ post, userBookmarks }) {
                 {localStorage.pawsId && <div
                 onClick = { async e => {
                     e.stopPropagation()                    
-                    if(!isBookmarked) await addBookmark()
-                    if(isBookmarked) await removeBookmark()
+                    if(!isBookmarked) addBookmark()
+                    if(isBookmarked) removeBookmark()
                     setIsBookmarked(!isBookmarked)
                 }}
                  className = {`bookmark ${isBookmarked}`}> </div> }

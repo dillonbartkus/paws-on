@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 export default function Feed({ feedData, newUserToast }) {
 
     const [userBookmarks, setUserBookmarks] = useState([])
-
+    const [redirectToNewPost, setRedirectToNewPost] = useState()    
+    
     useEffect( () => {        
         if(localStorage.pawsId) getUserBookmarks()
     }, [])
@@ -23,9 +25,16 @@ export default function Feed({ feedData, newUserToast }) {
 
             {!localStorage.pawsId && <p>Welcome! Here is a list of Lost and Found Cats. Would you like to post a lost or found cat? Create an account to share your post with everyone!</p> }
 
+            {localStorage.pawsId && <button
+            onClick = { () => setRedirectToNewPost(true) }
+            className = 'blue-button'>Create Post</button> }
+
             <h2 className = {`lostfound ${newUserToast !== 'false' ? false : true}`}>Lost and Found Cats Posted</h2>
             
             {feedData && feedData.map( post => <Post post = {post} key = {post.id} userBookmarks = {userBookmarks} /> )}
+
+            {redirectToNewPost && 
+            <Redirect push to='/newpost' />}
 
         </div>
     )

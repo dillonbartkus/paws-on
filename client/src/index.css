@@ -65,7 +65,7 @@ select {
 .blue-button {
   background: rgba(53, 190, 224, 0.8);
   border-radius: 6px;
-  height: 40px;
+  height: 44px;
   width: 250px;
   color: #FFF;
   font-weight: 600;
@@ -75,7 +75,7 @@ select {
 .green-button {
   background: rgba(24, 206, 187, 0.8);
   border-radius: 6px;
-  height: 40px;
+  height: 44px;
   width: 250px;
   color: #FFF;
   font-weight: 600;
@@ -125,6 +125,7 @@ select {
 
 .header-loggedin > img:first-of-type {
   width: 20px;
+  padding: 5px;
   cursor: pointer;
 }
 
@@ -137,7 +138,7 @@ select {
 .user-dropdown {
   z-index: 1;
   position: absolute;
-  top: 101px;
+  top: 85px;
   right: auto;
   margin: 0 auto;
   background: #FFFFFF;
@@ -165,7 +166,6 @@ select {
 }
 
 .header-logo {
-  width: 20%;
   height: 66%;
   display: flex;
   align-items: center;
@@ -173,7 +173,7 @@ select {
 
 .header-logo > img:first-of-type {
   height: 100%;
-  margin-right: 3%;
+  margin-right: 5%;
 }
 
 .header-logo > p {
@@ -236,13 +236,18 @@ select {
   position: relative;
 }
 
+.feed > .blue-button {
+  font-size: 18px;
+  display: block;
+  margin: 45px auto;
+  width: 285px;
+}
+
 .feed > p {
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
   line-height: 30px;
-  display: flex;
-  align-items: center;
   letter-spacing: 0.5px;
   color: #757575;
   margin-bottom: 3%;

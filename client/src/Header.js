@@ -8,6 +8,10 @@ export default function({ userDropdown, setUserDropdown }) {
 
     const [redirectToLogin, setRedirectToLogin] = useState(false)
     const [redirectToRegister, setRedirectToRegister] = useState(false)
+    const [redirectToHome, setRedirectToHome] = useState(false)
+    const [redirectToProfile, setRedirectToProfile] = useState(false)
+    const [redirectToShelters, setRedirectToShelters] = useState(false)
+    const [redirectToBookmarks, setRedirectToBookmarks] = useState(false)
 
     const { pawsId, pawsUser, pawsAvatar } = localStorage
     
@@ -52,18 +56,41 @@ export default function({ userDropdown, setUserDropdown }) {
                 <img src = {pawsAvatar} alt = 'user pic' />
 
                 <div className = {`user-dropdown ${userDropdown}`}>
-                    <p>Profile</p>
-                    <p>Bookmarked</p>
-                    <p>Find Shelters</p>
+                    <p onClick = { () => setRedirectToProfile(true) }
+                    >Profile</p>
+
+                    <p onClick = { () => setRedirectToBookmarks(true) }
+                    >Bookmarked</p>
+
+                    <p onClick = { () => setRedirectToShelters(true) }
+                    >Find Shelters</p>
+                    
+                    <p onClick = { () => {
+                        // localStorage.clear()
+                        setRedirectToHome(true)
+                    }}
+                    >Logout</p>
                 </div>
 
             </div> }
+
+            {redirectToHome &&
+            <Redirect to='/' />}
 
             {redirectToLogin &&
             <Redirect push to='/login' />}
 
             {redirectToRegister && 
             <Redirect push to='/register' />}
+
+            {redirectToBookmarks && 
+            <Redirect push to='/bookmarks' />}
+
+            {redirectToProfile && 
+            <Redirect push to='/profile' />}
+
+            {redirectToShelters && 
+            <Redirect push to='/shelters' />}
 
         </div>
     )
