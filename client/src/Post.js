@@ -5,21 +5,8 @@ import { Redirect } from 'react-router-dom'
 
 export default function Post({ post, userBookmarks }) {
 
-    const [posterName, setPosterName] = useState()
-    const [posterEmail, setPosterEmail] = useState()
     const [isBookmarked, setIsBookmarked] = useState(false)
     const [redirectToPost, setRedirectToPost] = useState(false)
-
-    useEffect( () => {
-
-        const getPosterAuthor = async () => {
-            const res = await axios.post(`http://localhost:8080/post/${post.author_id}`)
-            setPosterEmail(res.data.data.email)
-            setPosterName(res.data.data.name)
-        }
-
-        getPosterAuthor()
-    }, [posterEmail, posterName, post.author_id])
 
     useEffect( () => {        
         if(userBookmarks.filter( bm => bm === post.id ).length) setIsBookmarked(true)
@@ -58,7 +45,7 @@ export default function Post({ post, userBookmarks }) {
 
                 <p className = 'post-title'>{post.title}</p>
 
-                <p className = 'posted-by'>Posted by <span>{posterName}</span></p>
+                <p className = 'posted-by'>Posted by <span>{post.name}</span></p>
 
                 <p className = 'post-subheader'>Description</p>
                 <p className = 'post-desc'>{post.description}</p>
@@ -69,14 +56,18 @@ export default function Post({ post, userBookmarks }) {
                 <button
                 onClick = { e => {
                     e.stopPropagation()
-                    window.location.href = `mailto:${posterEmail}`
+                    window.location.href = `mailto:${post.email}`
                 }}
                 className = 'green-button'>Contact</button>
 
             </div>
 
             {redirectToPost && 
-            <Redirect push to={`/post/${post.id}`} />}
+                <Redirect push to={{
+                pathname: `/post/${post.id}`,
+                state: { id: post.id }
+                }}
+            /> }
 
         </div>
 

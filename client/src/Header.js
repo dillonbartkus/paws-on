@@ -53,7 +53,7 @@ export default function({ userDropdown, setUserDropdown }) {
                 onClick = { () => setUserDropdown(!userDropdown) }
                 src = {arrow} alt = '' />
 
-                <img src = {pawsAvatar} alt = 'user pic' />
+                <img src = {pawsAvatar} alt = 'avatar' />
 
                 <div className = {`user-dropdown ${userDropdown}`}>
                     <p onClick = { () => setRedirectToProfile(true) }
@@ -66,7 +66,7 @@ export default function({ userDropdown, setUserDropdown }) {
                     >Find Shelters</p>
                     
                     <p onClick = { () => {
-                        // localStorage.clear()
+                        localStorage.clear()
                         setRedirectToHome(true)
                     }}
                     >Logout</p>

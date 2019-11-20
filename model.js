@@ -28,7 +28,9 @@ model.createUser = user => {
 model.getFeed = () => {
   return db.query(
     `
-    SELECT * FROM posts
+    SELECT posts.*, users.name, users.email
+    FROM users
+    INNER JOIN posts on users.id = posts.author_id
     `
   )
 }
@@ -36,8 +38,8 @@ model.getFeed = () => {
 model.getPostInfo = id => {
   return db.one(
     `
-    SELECT name, email FROM users
-    WHERE id = $1
+    SELECT * FROM posts
+    WHERE posts.id = $1
     `,
     id
   )

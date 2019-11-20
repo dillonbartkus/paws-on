@@ -236,11 +236,19 @@ select {
   position: relative;
 }
 
-.feed > .blue-button {
+.feed > .blue-button, .postdetails > .blue-button {
   font-size: 18px;
   display: block;
   margin: 45px auto;
   width: 285px;
+}
+
+.feed > .blue-button {
+  display: none;
+}
+
+.feed > .blue-button.false {
+  display: block;
 }
 
 .feed > p {
@@ -254,7 +262,7 @@ select {
   margin-top: 0;
 }
 
-.feed > h2 {
+.feed > h2, .postdetails > h2 {
   font-weight: 600;
   font-size: 24px;
   line-height: 28px;
@@ -359,6 +367,11 @@ select {
 
 .bookmark:hover {
   filter: brightness(1.33);
+}
+
+.postdetails {
+  width: 80%;
+  margin: auto;
 }
 
 .login, .register {
@@ -569,11 +582,6 @@ select {
   .post-desc {
     font-size: 16px;
   }
-
-  .post-content > button {
-    /* width: 25%; */
-  }
-
 }
 
 @media only screen and (max-width: 950px){

@@ -7,7 +7,7 @@ export default function Feed({ feedData, newUserToast }) {
 
     const [userBookmarks, setUserBookmarks] = useState([])
     const [redirectToNewPost, setRedirectToNewPost] = useState()    
-    
+
     useEffect( () => {        
         if(localStorage.pawsId) getUserBookmarks()
     }, [])
@@ -27,7 +27,7 @@ export default function Feed({ feedData, newUserToast }) {
 
             {localStorage.pawsId && <button
             onClick = { () => setRedirectToNewPost(true) }
-            className = 'blue-button'>Create Post</button> }
+            className = {`blue-button ${newUserToast}`}>Create Post</button> }
 
             <h2 className = {`lostfound ${newUserToast !== 'false' ? false : true}`}>Lost and Found Cats Posted</h2>
             
