@@ -232,14 +232,49 @@ select {
 .feed {
   width: 80%;
   min-height: calc(100vh - 200px);
-  margin: 4% auto;
+  padding: 4% 10%;
   position: relative;
 }
 
-.feed > .blue-button, .postdetails > .blue-button {
+.feed > img {
+  z-index: -1;
+  position: absolute;
+}
+
+.feed > .bg-small:first-of-type {
+  bottom: 40%;
+  left: 44%;
+}
+
+.feed > .bg-small:nth-of-type(2) {
+  bottom: 1%;
+  left: 75%;
+}
+
+.feed > .bg-med:nth-of-type(3) {
+  bottom: 2%;
+  left: 33%;
+}
+
+.feed > .bg-med:nth-of-type(4) {
+  bottom: 64%;
+  left: 2%;
+}
+
+.feed > .bg-left {
+  bottom: 20%;
+  left: 0;
+}
+
+.feed > .bg-right {
+  bottom: 70%;
+  right: 0;
+}
+
+.feed > .blue-button {
   font-size: 18px;
   display: block;
-  margin: 45px auto;
+  margin: 1% auto;
   width: 285px;
 }
 
@@ -372,6 +407,13 @@ select {
 .postdetails {
   width: 80%;
   margin: auto;
+}
+
+.postdetails > .blue-button {
+  font-size: 18px;
+  display: block;
+  margin: 4% auto;
+  width: 285px;
 }
 
 .login, .register {

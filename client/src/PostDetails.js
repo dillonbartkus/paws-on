@@ -15,7 +15,8 @@ export default function(props) {
         if(props.feedData) {
             const ind = await parseInt(props.match.params.id - 1)
             setPost(props.feedData[ind])
-        } else {
+        }
+        else {
             const res = await axios.post(`http://localhost:8080/post/${props.location.state.id}`)
             setPost(res.data.data)
         }

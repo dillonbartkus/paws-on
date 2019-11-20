@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 import axios from 'axios'
+import left from './images/paws-bg-left.png'
+import right from './images/paws-bg-right.png'
+import med from './images/paws-bg-med.png'
+import small from './images/paws-bg-small.png'
 import { Redirect } from 'react-router-dom'
 
 export default function Feed({ feedData, newUserToast }) {
@@ -15,11 +19,18 @@ export default function Feed({ feedData, newUserToast }) {
     const getUserBookmarks = async () => {  // fetches boomarked posts of user and saves as an array
         const res = await axios.post(`http://localhost:8080/getUserBookmarks/${localStorage.pawsId}`)
         setUserBookmarks(res.data.data[0].array)
-    }    
+    }
         
     return(
 
         <div className = 'feed'>
+
+            <img className = 'bg-small' src = {small} alt = '' />
+            <img className = 'bg-small' src = {small} alt = '' />
+            <img className = 'bg-med' src = {med} alt = '' />
+            <img className = 'bg-med' src = {med} alt = '' />
+            <img className = 'bg-left' src = {left} alt = '' />
+            <img className = 'bg-right' src = {right} alt = '' />
 
             <h1 className = {`toast ${newUserToast}`} >Welcome! Thank you for lending a paw :)</h1>
 
