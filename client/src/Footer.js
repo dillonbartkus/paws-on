@@ -1,5 +1,5 @@
 import React from 'react'
-import copyright from './images/copyright.png'
+import copyright from './images/copyright.svg'
 
 export default function() {
 

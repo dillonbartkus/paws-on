@@ -56,10 +56,20 @@ select {
   color: rgba(89, 73, 158, 0.6);
   outline: 0;
   border: 0;
-  background: url(images/selectarrow.png) right center no-repeat; 
+  background: url(images/selectarrow.svg) right center no-repeat; 
   background-color: #fff; 
   appearance: none;
   -webkit-appearance: none;
+}
+
+.error {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: .25px;
+  color: #5DCBE6;
+  display: inline-block;
+  margin: calc(50vh - 100px) 37.5%;
 }
 
 .blue-button {
@@ -123,6 +133,10 @@ select {
   margin-left: 20px;
 }
 
+.header-loggedin > p:first-of-type {
+  color: #757575;
+}
+
 .header-loggedin > img:first-of-type {
   width: 20px;
   padding: 5px;
@@ -130,8 +144,8 @@ select {
 }
 
 .header-loggedin > img:last-of-type {
-  width: 60px;
-  height: 66px;
+  width: 50px;
+  height: 50px;
   border-radius: 50px;
 }
 
@@ -149,6 +163,7 @@ select {
 .user-dropdown > * {
   margin: 0;
   padding: 12.5px 20px;
+  color: #59499E;
 }
 
 .user-dropdown > *:hover {
@@ -211,10 +226,9 @@ select {
 
 .toast {
   position: absolute;
-  top: -4%;
-  margin: 3% auto;
   color: rgba(24, 206, 187, 0.8);
   transition: all 2.5s;
+  margin-top: 0;
 }
 
 .toast.true {
@@ -236,7 +250,7 @@ select {
   position: relative;
 }
 
-.feed > img {
+.feed > img, .postdetails > img {
   z-index: -1;
   position: absolute;
 }
@@ -253,7 +267,7 @@ select {
 
 .feed > .bg-med:nth-of-type(3) {
   bottom: 2%;
-  left: 33%;
+  left: 32%;
 }
 
 .feed > .bg-med:nth-of-type(4) {
@@ -262,19 +276,19 @@ select {
 }
 
 .feed > .bg-left {
-  bottom: 20%;
+  bottom: 10%;
   left: 0;
 }
 
 .feed > .bg-right {
-  bottom: 70%;
+  bottom: 60%;
   right: 0;
 }
 
 .feed > .blue-button {
   font-size: 18px;
   display: block;
-  margin: 1% auto;
+  margin: 0 auto 4% auto;
   width: 285px;
 }
 
@@ -286,7 +300,7 @@ select {
   display: block;
 }
 
-.feed > p {
+.feed > p, .find-shelters > p {
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -297,14 +311,11 @@ select {
   margin-top: 0;
 }
 
-.feed > h2, .postdetails > h2 {
+.lostfound {
   font-weight: 600;
   font-size: 24px;
   line-height: 28px;
   letter-spacing: .25px;
-  display: flex;
-  align-items: center;
-  text-align: center;
   color: #5DCBE6;
 }
 
@@ -336,7 +347,7 @@ select {
   bottom: 5%;
 }
 
-.post-content:hover {
+.feed > .post > .post-content:hover {
   background: rgba(176, 165, 223, 0.3);
 }
 
@@ -406,7 +417,23 @@ select {
 
 .postdetails {
   width: 80%;
-  margin: auto;
+  padding: 0 10%;
+  position: relative;
+}
+
+.postdetails > .bg-right {
+  right: 0;
+  top: 50%;
+}
+
+.postdetails > .bg-left {
+  left: 0;
+  bottom: 0;
+}
+
+.postdetails > .bg-med {
+  bottom: 0;
+  right: 7%;
 }
 
 .postdetails > .blue-button {
@@ -416,13 +443,99 @@ select {
   width: 285px;
 }
 
+.single-post {
+  width: 75%;
+  margin: 5% auto;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pictures, .map {
+  width: 50%;
+}
+
+.pictures > img {
+  width: 100%;
+}
+
+.single-post-content {
+  width: 100%;
+  margin: 5% auto;
+  padding: 0 5% 2% 5%;
+  border-radius: 4px;
+  background: rgba(176, 165, 223, 0.1);
+  position: relative;
+}
+
+.home-contact {
+  width: 100%;
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-post-content > .green-button {
+  right: 2.5%;
+  bottom: 5%;
+}
+
+.returnhome {
+  font-weight: 500;
+  color: #59499E;
+}
+
+.returnhome:hover {
+  box-shadow: 0 1px 0 #59499E;
+  cursor: pointer;
+}
+
 .login, .register {
   display: flex;
+}
+
+.find-shelters {
+  width: 80%;
+  padding: 0 10%;
+  min-height: calc(99vh - 200px);
+}
+
+.find-shelters > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 0;
+}
+
+.find-shelters > form > input {
+  width: 250px;
+  margin-bottom: 5%;
+}
+
+.find-shelters > form > button {
+  margin-bottom: 2.5%;
+}
+
+.shelter {
+  margin: 5% 0;
+  height: 200px;
+  background: rgba(176, 165, 223, 0.1);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shelter-info {
+  width: 66%;
+  display: flex;
+  flex-direction: column;
 }
 
 .welcome {
   width: 50%;
   height: 100vh;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -431,6 +544,25 @@ select {
 
 .welcome > img {
   position: absolute;
+}
+
+.welcome > img:first-of-type {
+  bottom: 6%;
+}
+
+.welcome > img:nth-of-type(2) {
+  top: 3%;
+  right: 15%;
+}
+
+.welcome > img:nth-of-type(3) {
+  bottom: 16%;
+  right: 12%;
+}
+
+.welcome > img:nth-of-type(4) {
+  top: 12%;
+  left: 8%;
 }
 
 .welcome > div {

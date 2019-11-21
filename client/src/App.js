@@ -10,7 +10,9 @@ import Footer from './Footer'
 import PostDetails from './PostDetails'
 import Profile from './Profile'
 import NewPost from './NewPost'
-// import SERVERURL from './config'
+import Shelters from './Shelters'
+import Bookmarks from './Bookmarks'
+// import config from './config'
 import {
   BrowserRouter as Router,
   Switch,
@@ -46,7 +48,7 @@ export default function App() {
     setTimeout( () => setNewUserToast('false'), 5000 )
   }
 
-  if(error) return <p>Error loading feed. Please refresh.</p>
+  if(error) return <p className = 'error'>Error loading feed. Please refresh.</p>
 
   return(
 
@@ -68,49 +70,53 @@ export default function App() {
         path='/post/:id'
         render={ (props) => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <PostDetails {...props} feedData = {feedData} /> </> } />
+        <PostDetails {...props} feedData = {feedData} /> 
+        <Footer /> </> } />
 
         <Route
         path='/profile'
         render={ () => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
         <Profile />
-        </> } />
+        <Footer /> </> } />
 
         <Route
         path='/newpost'
         render={ () => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <NewPost /> </> } />
+        <NewPost />
+        <Footer /> </> } />
 
         <Route
         path='/profile'
         render={ () => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Profile /> </> } />
+        <Profile />
+        <Footer /> </> } />
 
         <Route
         path='/shelters'
         render={ () => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <NewPost /> </> } />
+        <Shelters />
+        <Footer /> </> } />
 
         <Route
         path='/bookmarks'
         render={ () => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <NewPost /> </> } />
+        <Bookmarks />
+        <Footer /> </> } />
 
         <Route
         path='/'
         render={ () => <>
         <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Feed feedData = {feedData} newUserToast = {newUserToast} /> </> } />
+        <Feed feedData = {feedData} newUserToast = {newUserToast} /> 
+        <Footer /> </> } />
 
         <Redirect to='/' />
       </Switch>
-    <Footer />
-
     </Router>
   </div>
   )

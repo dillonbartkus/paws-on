@@ -3,7 +3,7 @@ import axios from 'axios'
 import SERVERURL from './config'
 import { Redirect } from 'react-router-dom'
 
-export default function Post({ post, userBookmarks }) {
+export default function Post({ post, userBookmarks }) {    
 
     const [isBookmarked, setIsBookmarked] = useState(false)
     const [redirectToPost, setRedirectToPost] = useState(false)

@@ -3,15 +3,15 @@ import Welcome from './Welcome'
 import ToS from './ToS'
 import axios from 'axios'
 import camera from './images/camera.png'
-import SERVERURL from './config'
 import setUserData from './lib/setUserData'
 import { Redirect } from 'react-router-dom'
-import keys from './awskeys'
+import config from './config'
 import aws from 'aws-sdk'
 
 export default function Register({ showToast }) {
 
     const uploadRef = React.createRef()
+    // const SERVERURL = config.SERVERURL
 
     const [showToS, setShowToS] = useState(false)
     const [isUploaded, setIsUploaded] = useState(false)
@@ -52,8 +52,8 @@ export default function Register({ showToast }) {
         const file = uploadRef.current.files[0]
 
         aws.config.update({
-            accessKeyId: keys.AWSKEY,
-            secretAccessKey: keys.AWSSECRET
+            accessKeyId: config.AWSKEY,
+            secretAccessKey: config.AWSSECRET
         });
         
         const s3 = new aws.S3( {

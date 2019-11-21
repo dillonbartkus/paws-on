@@ -38,7 +38,9 @@ model.getFeed = () => {
 model.getPostInfo = id => {
   return db.one(
     `
-    SELECT * FROM posts
+    SELECT posts.*, users.name, users.email
+    FROM users
+    INNER JOIN posts on users.id = posts.author_id
     WHERE posts.id = $1
     `,
     id

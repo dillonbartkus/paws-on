@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import logo from './images/pawslogo.png'
-import pawson from './images/pawson.png'
-import arrow from './images/selectarrow.png'
+import logo from './images/pawslogo.svg'
+import pawson from './images/pawson.svg'
+import arrow from './images/selectarrow.svg'
 import { Redirect } from 'react-router-dom'
 
 export default function({ userDropdown, setUserDropdown }) {

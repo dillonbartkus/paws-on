@@ -1,21 +1,11 @@
 import React from 'react'
-import logo from './images/pawslogo.png'
-import text from './images/pawson.png'
-import med from './images/paws-bg-med.png'
-import small from './images/paws-bg-small.png'
-import corner from './images/paws-bg-corner.png'
+import logo from './images/pawslogo.svg'
+import text from './images/pawson.svg'
+import med from './images/paws-bg-med.svg'
+import small from './images/paws-bg-small.svg'
+import corner from './images/paws-bg-corner.svg'
 
 export default function() {
-
-    const generateRandomPosition = () => {
-        const randomTop = Math.random() * window.innerHeight - 90 + "px";        
-        const randomLeft = Math.random() * (window.innerWidth / 2 - 90) + "px";           
-    
-        return {
-            top : randomTop,
-            left : randomLeft
-        }
-    }    
 
     return(
         <div className = 'welcome'>
@@ -30,10 +20,10 @@ export default function() {
 
             </div>
 
-            <img style = {generateRandomPosition()} src = {small} alt = '' />
-            <img style = {generateRandomPosition()} src = {small} alt = '' />
-            <img style = {generateRandomPosition()} src = {med} alt = '' />
-            <img style = {generateRandomPosition()} src = {med} alt = '' />
+            <img className = 'bg-small' src = {small} alt = '' />
+            <img className = 'bg-small' src = {small} alt = '' />
+            <img className = 'bg-med' src = {med} alt = '' />
+            <img className = 'bg-med' src = {med} alt = '' />
             <img className = 'bgpaw-corner' src = {corner} alt = '' />
 
         </div>
