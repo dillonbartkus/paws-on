@@ -54,7 +54,7 @@ export default function(props) {
         pauseAutoPlayOnHover: false
     }
 
-    if(error) return <p className = 'error'>Error loading post.</p>
+    if(error) return <div className = 'error'> <p>Error loading post.</p> </div>
     
     return(
         

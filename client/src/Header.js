@@ -1,18 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import logo from './images/pawslogo.svg'
 import pawson from './images/pawson.svg'
 import arrow from './images/selectarrow.svg'
-import { Redirect } from 'react-router-dom'
 
-export default function({ userDropdown, setUserDropdown }) {
+export default function(props) {
 
-    const [redirectToLogin, setRedirectToLogin] = useState(false)
-    const [redirectToRegister, setRedirectToRegister] = useState(false)
-    const [redirectToHome, setRedirectToHome] = useState(false)
-    const [redirectToProfile, setRedirectToProfile] = useState(false)
-    const [redirectToShelters, setRedirectToShelters] = useState(false)
-    const [redirectToBookmarks, setRedirectToBookmarks] = useState(false)
-
+    const { userDropdown, setUserDropdown } = props
     const { pawsId, pawsUser, pawsAvatar } = localStorage
     
     return(
@@ -31,7 +24,7 @@ export default function({ userDropdown, setUserDropdown }) {
             <div className = 'header-login-signup'>
 
                 <p
-                onClick = { () => setRedirectToLogin(true) }
+                onClick = { () => props.history.push('/login') }
                 >
                 Log In</p>
 
@@ -39,7 +32,7 @@ export default function({ userDropdown, setUserDropdown }) {
 
                 <button
                 className = 'blue-button'
-                onClick = { () => setRedirectToRegister(true) } >
+                onClick = { () => props.history.push('/register') } >
                 Create New Account</button>
 
             </div> }
@@ -56,41 +49,23 @@ export default function({ userDropdown, setUserDropdown }) {
                 <img src = {pawsAvatar} alt = 'avatar' />
 
                 <div className = {`user-dropdown ${userDropdown}`}>
-                    <p onClick = { () => setRedirectToProfile(true) }
+                    <p onClick = { () => props.history.push('/profile') }
                     >Profile</p>
 
-                    <p onClick = { () => setRedirectToBookmarks(true) }
+                    <p onClick = { () => props.history.push('/bookmarks') }
                     >Bookmarked</p>
 
-                    <p onClick = { () => setRedirectToShelters(true) }
+                    <p onClick = { () => props.history.push('/shelters') }
                     >Find Shelters</p>
                     
                     <p onClick = { () => {
                         localStorage.clear()
-                        setRedirectToHome(true)
+                        props.history.push('/')
                     }}
                     >Logout</p>
                 </div>
 
             </div> }
-
-            {redirectToHome &&
-            <Redirect to='/' />}
-
-            {redirectToLogin &&
-            <Redirect push to='/login' />}
-
-            {redirectToRegister && 
-            <Redirect push to='/register' />}
-
-            {redirectToBookmarks && 
-            <Redirect push to='/bookmarks' />}
-
-            {redirectToProfile && 
-            <Redirect push to='/profile' />}
-
-            {redirectToShelters && 
-            <Redirect push to='/shelters' />}
 
         </div>
     )

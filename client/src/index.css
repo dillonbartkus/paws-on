@@ -68,8 +68,10 @@ select {
   line-height: 28px;
   letter-spacing: .25px;
   color: #5DCBE6;
-  display: inline-block;
-  margin: calc(50vh - 100px) 37.5%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .blue-button {
@@ -152,7 +154,7 @@ select {
 .user-dropdown {
   z-index: 1;
   position: absolute;
-  top: 85px;
+  top: 75px;
   right: auto;
   margin: 0 auto;
   background: #FFFFFF;
@@ -530,6 +532,49 @@ select {
   width: 66%;
   display: flex;
   flex-direction: column;
+}
+
+.profile-page {
+  width: 80%;
+  margin: 5% auto;
+}
+
+.profile {
+  margin: 10% 5%;
+  display: flex;
+}
+
+.profile > img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-right: 50px;
+}
+
+.userinfo {
+  width: 600px;
+  display: flex;
+}
+
+.userinfo-section {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.userinfo-section > p:last-child:hover {
+  box-shadow: 0 1px 0 #59499E;
+  cursor: pointer;
+}
+
+.profile-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-bottom > button {
+  margin-bottom: 2%;
 }
 
 .welcome {

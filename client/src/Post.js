@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import SERVERURL from './config'
+// import SERVERURL from './config'
 import { Redirect } from 'react-router-dom'
 
 export default function Post({ post, userBookmarks }) {    
@@ -24,7 +24,9 @@ export default function Post({ post, userBookmarks }) {
             post_id : post.id
         }
         await axios.delete(`http://localhost:8080/removebookmark`, {data: data})
-    }   
+    }
+
+    // console.log(post.address.match(/[0-9]{5}/)[0])
 
     return(
 
@@ -56,7 +58,7 @@ export default function Post({ post, userBookmarks }) {
                 <button
                 onClick = { e => {
                     e.stopPropagation()
-                    window.location.href = `mailto:${post.email}`
+                    window.location.href = `mailto:${post.email}?subject=Paws-On: ${post.title}`
                 }}
                 className = 'green-button'>Contact</button>
 

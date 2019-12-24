@@ -15,8 +15,6 @@ export default function() {
         setShelters(res.data.petfinder.shelters.shelter)
     }
 
-    console.log(shelters)
-
     return(
         
         <div className = 'find-shelters'>
@@ -47,8 +45,6 @@ export default function() {
 
             {shelters.map( (shelter, id) => {
                 return <div className = 'shelter' key = {id}>
-
-                    <img />
 
                     <div className = 'shelter-info'>
                         <p>{shelter.name.$t}</p>

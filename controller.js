@@ -60,6 +60,21 @@ controller.getFeed = async (req, res) => {
   catch(err) {
     res.status(500).json({ err });
   }
+}
+
+controller.getMyPosts = async (req, res) => {
+  const id = req.params.id
+
+  try {    
+    const data = await Paws.getMyPosts(id)
+      res.json({
+        data: data
+      })      
+  }
+
+  catch(err) {
+    res.status(500).json({ err });
+  }
 };
 
 controller.getPostInfo = async (req, res) => {

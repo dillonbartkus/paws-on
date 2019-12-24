@@ -9,6 +9,8 @@ router.post('/register', controller.createUser)
 
 router.post('/feed', controller.getFeed)
 
+router.post('/myposts/:id', controller.getMyPosts)
+
 router.post('/post/:id', controller.getPostInfo)
 
 router.post('/getuserbookmarks/:id', controller.getUserBookmarks)

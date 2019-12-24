@@ -113,17 +113,20 @@ export default function Register({ showToast }) {
                     <input
                     placeholder = 'Email'
                     type = 'email'
+                    name = 'email'
                     required
                     ></input>
 
                     <input
                     placeholder = 'Create Password'
                     type = 'password'
+                    name = 'password'
                     required
                     ></input>
 
                     <input
                     placeholder = 'Full Name'
+                    name = 'name'
                     type = 'text'
                     required
                     ></input>

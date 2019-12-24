@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Welcome from './Welcome'
-import SERVERURL from './config'
+// import SERVERURL from './config'
 import setUserData from './lib/setUserData'
 import { Redirect } from 'react-router-dom'
 
@@ -46,16 +46,19 @@ export default function Login() {
                     <input
                     placeholder = 'Email'
                     type = 'email'
+                    name = 'email'
+                    autoFocus
                     required
                     ></input>
 
                     <input
                     placeholder = 'Password'
                     type = 'password'
+                    name = 'password'
                     required
                     ></input>
                     <p
-                    onClick = { () => window.location.href = `mailto:dillonbartkus@gmail.com?subject=Paws%20On%20PW%20Reset` }
+                    onClick = { () => window.location.href = `mailto:dillonbartkus@gmail.com?subject=Paws-On PW Reset` }
                     className = 'forgotpw'>Forgot password?</p>
 
                     {invalidCred && <p className = 'invalidcred'>Invalid credentials.</p>}

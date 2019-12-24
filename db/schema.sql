@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users(
   email VARCHAR(50) NOT NULL UNIQUE,
   name VARCHAR(50) NOT NULL UNIQUE,
   password VARCHAR(99) NOT NULL,
-  city TEXT NOT NULL,
+  zip INTEGER NOT NULL,
   avatar VARCHAR(1000),
   UNIQUE (name, email)
 );
