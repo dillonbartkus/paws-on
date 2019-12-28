@@ -554,6 +554,7 @@ select {
 .userinfo {
   width: 600px;
   display: flex;
+  position: relative;
 }
 
 .userinfo-section {
@@ -562,7 +563,24 @@ select {
   margin: 0 auto;
 }
 
-.userinfo-section > p:last-child:hover {
+.userinfo-section > input {
+  font-size: 16px;
+  font-weight: 600;
+  width: 130px;
+}
+
+.post-subheader.empty {
+  height: 19px;
+}
+
+.pw-error {
+  position: absolute;
+  color: red;
+  bottom: -33px;
+  margin: auto;
+}
+
+.post-subheader.edit:hover {
   box-shadow: 0 1px 0 #59499E;
   cursor: pointer;
 }

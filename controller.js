@@ -48,6 +48,24 @@ controller.createUser = async (req, res) => {
     });
 }
 
+controller.changePW = async (req, res) => {  
+  const { password } = req.body
+  const id = req.params.id
+  
+  const password_digest = await hashPassword(password);
+  
+  Paws.changePW(password_digest, id)
+   .then( data => {
+      res.json({
+        message: 'changed',
+        data: data
+      });
+    })
+    .catch(err => {
+      res.status(500).json({ err })
+    });
+}
+
 controller.getFeed = async (req, res) => {
 
   try {    

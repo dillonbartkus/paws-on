@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Welcome from './Welcome'
 // import SERVERURL from './config'
 import setUserData from './lib/setUserData'
-import { Redirect } from 'react-router-dom'
 
-export default function Login() {
+export default function Login () {
     
     const [invalidCred, setInvalidCred] = useState(false)
-    const [redirectToRegister, setRedirectToRegister] = useState(false)
-    const [redirectToFeed, setRedirectToFeed] = useState(false)
+    const history = useHistory()
 
     const checkCredentials = async e => {
         const email = e.currentTarget.childNodes[0].value
@@ -21,10 +20,9 @@ export default function Login() {
                 pw: pw
             })            
             setUserData(res.data.data)
-            setRedirectToFeed(true)
+            history.push('/')
         }
         catch(err) {
-            console.log(err.message)
             setInvalidCred(true)
         }
     }
@@ -58,7 +56,7 @@ export default function Login() {
                     required
                     ></input>
                     <p
-                    onClick = { () => window.location.href = `mailto:dillonbartkus@gmail.com?subject=Paws-On PW Reset` }
+                    onClick = { () => window.location.href = `mailto:dillonbartkus@gmail.com?subject=Paws-On PW Reset&body=Hello, I have forgotten my password for Paws-On. Please help!`}
                     className = 'forgotpw'>Forgot password?</p>
 
                     {invalidCred && <p className = 'invalidcred'>Invalid credentials.</p>}
@@ -68,16 +66,10 @@ export default function Login() {
                 </form>
 
                 <button className = 'blue-button'
-                onClick = { () => setRedirectToRegister(true) }
+                onClick = { () => history.push('/register') }
                 >Create New Account</button>
 
             </div>
-
-            {redirectToRegister && 
-            <Redirect push to='/register' />}
-
-            {redirectToFeed && 
-            <Redirect push to='/' />}
 
         </div>
     )

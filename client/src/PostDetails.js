@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom'
+import { useLocation} from 'react-router'
 import './carousel.css'
 import axios from 'axios'
 import Map from './Map'
@@ -7,9 +9,8 @@ import Flickity from 'react-flickity-component'
 import left from './images/paws-bg-left.svg'
 import right from './images/paws-bg-right.svg'
 import med from './images/paws-bg-med.svg'
-import { Redirect } from 'react-router-dom'
 
-export default function(props) {
+export default function PostDetails () {
 
     const [post, setPost] = useState()
     const [coords, setCoords] = useState({
@@ -17,13 +18,13 @@ export default function(props) {
         long: null
     })
     const [error, setError] = useState(false)
-    const [redirectToNewPost, setRedirectToNewPost] = useState(false)
-    const [redirectToHome, setRedirectToHome] = useState(false)
+    const location = useLocation()
+    const history = useHistory()
 
     useEffect( () => {
         const fetchPost = async () => {
             try {
-                const res = await axios.post(`http://localhost:8080/post/${props.location.state.id}`)
+                const res = await axios.post(`http://localhost:8080/post/${location.state.id}`)
                 setPost(res.data.data)
             }
             catch(err) {
@@ -32,7 +33,7 @@ export default function(props) {
             }
         }
         fetchPost()
-    }, [props.location.state.id])
+    }, [location.state.id])
 
     useEffect( () => {
         const fetchCoords = async () => {
@@ -65,7 +66,7 @@ export default function(props) {
             <img className = 'bg-med' src = {med} alt = '' />
 
             {localStorage.pawsId && <button
-            onClick = { () => setRedirectToNewPost(true) }
+            onClick = { () => history.push('/newpost') }
             className = 'blue-button'>Create Post</button> }
 
             <h2 className = 'lostfound'>Lost and Found Cats Posted</h2>
@@ -107,7 +108,7 @@ export default function(props) {
 
                     <div className = 'home-contact'>
                         <p className = 'returnhome'
-                        onClick = { () => setRedirectToHome(true) } >
+                        onClick = { () => history.push('/') } >
                         Return Home</p>
 
                         <button
@@ -121,12 +122,6 @@ export default function(props) {
                 </div>
 
             </div> }
-
-            {redirectToHome && 
-            <Redirect push to='/' />}
-
-            {redirectToNewPost && 
-            <Redirect push to='/newpost' />}
 
         </div>
     )

@@ -1,21 +1,36 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from "react-router-dom"
 import MyPost from './MyPost'
 import axios from 'axios'
 // import config from './config'
 
-export default function(props) {
+export default function Profile () {
 
+    const { pawsUser, pawsZip, pawsEmail, pawsAvatar, pawsId } = localStorage
     const [myPosts, setMyPosts] = useState()
-    const { pawsUser, pawsZip, pawsEmail, pawsAvatar } = localStorage
+    const [editZip, setEditZip] = useState(false)
+    const [newZip, setNewZip] = useState(pawsZip)
+    const [editName, setEditName] = useState(false)
+    const [newName, setNewName] = useState(pawsUser)
+    const [editPW, setEditPW] = useState(false)
+    const [newPW, setNewPW] = useState('')
+    const [pwChanged, setPwChanged]= useState(false)
+    const [pwLengthError, setPwLengthError]= useState(false)
+    const history = useHistory()
 
-    useEffect( () => {        
+    useEffect( () => {
         getMyPosts()
     }, [])
 
     const getMyPosts = async () => {
         const res = await axios.post(`http://localhost:8080/myposts/3`)
         setMyPosts(res.data.data)
-    }    
+    }  
+
+    const changePW = async () => {
+        const res = await axios.put(`http://localhost:8080/changepw/3`, { password: newPW })
+        console.log(res)
+    }  
 
     return(
         
@@ -29,24 +44,73 @@ export default function(props) {
 
                     <div className = 'userinfo-section'>
                         <p className = 'post-subheader'>Name</p>
-                        <p className = 'post-subheader'>Zip Code</p>
                         <p className = 'post-subheader'>Email</p>
-                        <p className = 'post-subheader'>Reset Password</p>
+                        <p className = 'post-subheader'>Zip Code</p>
+                        <p className = {`post-subheader ${pwChanged ? '' : 'edit'}`}
+                        onClick = { () => !editName && !editZip &&  setEditPW(!editPW) }
+                        >{pwChanged ? 'Password Changed!' : 'Change Password'}</p>
+
+                        {pwLengthError && <p className = 'pw-error'>Password length must be longer than 5 characters.</p> }
                     </div>
 
                     <div className = 'userinfo-section'>
-                        <p className = 'post-subheader'>{pawsUser}</p>
-                        <p className = 'post-subheader'>{pawsZip}</p>
+                        { editName ?
+                        <input
+                        onChange = { e => setNewName(e.target.value) }
+                        value = {newName}
+                        name = 'name'
+                        autoFocus
+                        ></input> :
+                        <p className = 'post-subheader'>{pawsUser}</p> }
+
                         <p className = 'post-subheader'>{pawsEmail}</p>
-                        <p className = 'post-subheader'></p>
+
+                        { editZip ?
+                        <input
+                        onChange = { e => setNewZip(e.target.value) }
+                        value = {newZip}
+                        name = 'zip'
+                        maxLength = '5'
+                        minLength = '5'
+                        autoFocus
+                        ></input> :
+                        <p className = 'post-subheader'>{pawsZip}</p> }
+
+                        { editPW ?
+                        <input
+                        onChange = { e => setNewPW(e.target.value) }
+                        value = {newPW}
+                        type = 'password'
+                        autoFocus
+                        ></input> :
+                        <p className = 'post-subheader empty'></p> }
                     </div>
 
                     <div className = 'userinfo-section'>
-                        <p className = 'post-subheader'>Edit</p>
-                        <p className = 'post-subheader'>Edit</p>
-                        <p className = 'post-subheader'></p>
-                        <p className = 'post-subheader'></p>
+                        <p className = 'post-subheader edit'
+                        onClick = { () => !editPW && !editZip && setEditName(!editName) }
+                        >{editName ? 'Done' : 'Edit'}</p>
+
+                        <p className = 'post-subheader empty'></p>
+
+                        <p className = 'post-subheader edit'
+                        onClick = { () => !editName && !editPW && setEditZip(!editZip) }
+                        >{editZip ? 'Done' : 'Edit'}</p>
+
+                        { editPW ?
+                        <p className = 'post-subheader edit'
+                        onClick = { () => {
+                            if(newPW.length > 5) {
+                                changePW()
+                                setEditPW(false)
+                                setPwChanged(true)
+                                setPwLengthError(false)
+                            } else setPwLengthError(true)
+                        }}
+                        >Done</p> :
+                        <p className = 'post-subheader empty'></p> }
                     </div>
+
 
                 </div>
 
@@ -63,11 +127,11 @@ export default function(props) {
             <div className = 'profile-bottom'>
 
                 <button className = 'blue-button'
-                onClick = { () => props.history.push('/newpost') }>
+                onClick = { () => history.push('/newpost') }>
                 Create Post</button>
 
                 <p className = 'returnhome'
-                onClick = { () => props.history.push('/') }
+                onClick = { () => history.push('/') }
                 style = {{  }}>
                 Return Home</p>
 

@@ -19,7 +19,7 @@ import {
   Route
 } from "react-router-dom"
 
-export default function App() {
+export default function App () {
 
   const [newUserToast, setNewUserToast] = useState('false') // toast welcoming new user
   const [feedData, setFeedData] = useState()
@@ -57,66 +57,68 @@ export default function App() {
 
     <Router>
       <Switch>
+
         <Route
         exact path='/login'
-        render={ () => <Login />}
-        />
+        render={ () => <Login />} />
 
         <Route
         exact path='/register'
-        render={ () => <Register showToast = {showNewUserToast} />}
-        />
+        render={ () => <Register showToast = {showNewUserToast} />} />
 
-        <Route
-        exact path='/post/:id'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <PostDetails {...props} feedData = {feedData} /> 
-        <Footer /> </> } />
+        <Switch>
+          <Route
+          exact path='/post/:id'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <PostDetails feedData = {feedData} /> 
+          <Footer /> </> } />
 
-        <Route
-        exact path='/profile'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Profile {...props} />
-        <Footer /> </> } />
+          <Route
+          exact path='/profile'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <Profile />
+          <Footer /> </> } />
 
-        <Route
-        exact path='/newpost'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <NewPost />
-        <Footer /> </> } />
+          <Route
+          exact path='/newpost'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <NewPost />
+          <Footer /> </> } />
 
-        <Route
-        exact path='/profile'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Profile {...props} />
-        <Footer /> </> } />
+          <Route
+          exact path='/profile'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <Profile />
+          <Footer /> </> } />
 
-        <Route
-        exact path='/shelters'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Shelters />
-        <Footer /> </> } />
+          <Route
+          exact path='/shelters'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <Shelters />
+          <Footer /> </> } />
 
-        <Route
-        exact path='/bookmarks'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Bookmarks />
-        <Footer /> </> } />
+          <Route
+          exact path='/bookmarks'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <Bookmarks />
+          <Footer /> </> } />
 
-        <Route
-        exact path='/'
-        render={ (props) => <>
-        <Header {...props} setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
-        <Feed {...props} feedData = {feedData} newUserToast = {newUserToast} /> 
-        <Footer /> </> } />
+          <Route
+          exact path='/'
+          render={ () => <>
+          <Header setUserDropdown = {setUserDropdown} userDropdown = {userDropdown} />
+          <Feed feedData = {feedData} newUserToast = {newUserToast} /> 
+          <Footer /> </> } />
 
-        <Redirect to='/' />
+          <Redirect to='/' />
+
+        </Switch>
       </Switch>
     </Router>
   </div>

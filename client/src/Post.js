@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 // import SERVERURL from './config'
-import { Redirect } from 'react-router-dom'
 
-export default function Post({ post, userBookmarks }) {    
+export default function Post ({ post, userBookmarks }) {    
 
     const [isBookmarked, setIsBookmarked] = useState(false)
-    const [redirectToPost, setRedirectToPost] = useState(false)
+    const history = useHistory()
 
     useEffect( () => {        
         if(userBookmarks.filter( bm => bm === post.id ).length) setIsBookmarked(true)
@@ -30,7 +30,13 @@ export default function Post({ post, userBookmarks }) {
 
     return(
 
-        <div onClick = { () => setRedirectToPost(true) } className = 'post'>
+        <div onClick = { () => {
+            history.push({
+                pathname: `/post/${post.id}`,
+                state: { id: post.id }
+              })
+            }}
+            className = 'post'>
 
             <div className = 'post-pic' style = {{'backgroundImage': `url(${post.picture_one})` }} ></div>
 
@@ -63,13 +69,6 @@ export default function Post({ post, userBookmarks }) {
                 className = 'green-button'>Contact</button>
 
             </div>
-
-            {redirectToPost && 
-                <Redirect push to={{
-                pathname: `/post/${post.id}`,
-                state: { id: post.id }
-                }}
-            /> }
 
         </div>
 

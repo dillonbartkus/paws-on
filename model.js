@@ -25,6 +25,18 @@ model.createUser = user => {
   )
 }
 
+model.changePW = (pw, id) => {  
+  return db.one(
+    `
+    UPDATE users SET
+     password = $1
+    WHERE id = $2
+    RETURNING *
+    `,
+    [pw, id]
+  )
+}
+
 model.getFeed = () => {
   return db.query(
     `

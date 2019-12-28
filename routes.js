@@ -17,6 +17,8 @@ router.post('/getuserbookmarks/:id', controller.getUserBookmarks)
 
 router.post('/addbookmark/:id', controller.addBookmark)
 
+router.put('/changepw/:id', controller.changePW)
+
 router.delete('/removebookmark', controller.removeBookmark)
 
 module.exports = router

@@ -1,12 +1,14 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import logo from './images/pawslogo.svg'
 import pawson from './images/pawson.svg'
 import arrow from './images/selectarrow.svg'
 
-export default function(props) {
+export default function Header (props) {
 
     const { userDropdown, setUserDropdown } = props
     const { pawsId, pawsUser, pawsAvatar } = localStorage
+    const history = useHistory()
     
     return(
 
@@ -24,7 +26,7 @@ export default function(props) {
             <div className = 'header-login-signup'>
 
                 <p
-                onClick = { () => props.history.push('/login') }
+                onClick = { () => history.push('/login') }
                 >
                 Log In</p>
 
@@ -32,7 +34,7 @@ export default function(props) {
 
                 <button
                 className = 'blue-button'
-                onClick = { () => props.history.push('/register') } >
+                onClick = { () => history.push('/register') } >
                 Create New Account</button>
 
             </div> }
@@ -49,18 +51,18 @@ export default function(props) {
                 <img src = {pawsAvatar} alt = 'avatar' />
 
                 <div className = {`user-dropdown ${userDropdown}`}>
-                    <p onClick = { () => props.history.push('/profile') }
+                    <p onClick = { () => history.push('/profile') }
                     >Profile</p>
 
-                    <p onClick = { () => props.history.push('/bookmarks') }
+                    <p onClick = { () => history.push('/bookmarks') }
                     >Bookmarked</p>
 
-                    <p onClick = { () => props.history.push('/shelters') }
+                    <p onClick = { () => history.push('/shelters') }
                     >Find Shelters</p>
                     
                     <p onClick = { () => {
                         localStorage.clear()
-                        props.history.push('/')
+                        history.push('/')
                     }}
                     >Logout</p>
                 </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Post from './Post'
 import axios from 'axios'
 // import config from './config'
@@ -7,11 +8,11 @@ import right from './images/paws-bg-right.svg'
 import med from './images/paws-bg-med.svg'
 import small from './images/paws-bg-small.svg'
 
-export default function(props) {
+export default function Feed (props) {
 
     const { feedData, newUserToast } = props
-
     const [userBookmarks, setUserBookmarks] = useState([])
+    const history = useHistory()
 
     useEffect( () => {        
         if(localStorage.pawsId) getUserBookmarks()
@@ -38,7 +39,7 @@ export default function(props) {
             {!localStorage.pawsId && <p>Welcome! Here is a list of lost and found animals. Would you like to post a lost or found cat? Create an account to share your post with everyone!</p> }
 
             {localStorage.pawsId && <button
-            onClick = { () => props.history.push('/newpost') }
+            onClick = { () => history.push('/newpost') }
             className = {`blue-button ${newUserToast}`}>Create Post</button> }
 
             <h2 className = {`lostfound ${newUserToast !== 'false' ? false : true}`}>Lost and Found Animals Posted</h2>
