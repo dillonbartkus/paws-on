@@ -6,7 +6,7 @@ import axios from 'axios'
 
 export default function Profile () {
 
-    const { pawsUser, pawsZip, pawsEmail, pawsAvatar, pawsId } = localStorage
+    const { pawsUser, pawsZip, pawsEmail, pawsAvatar } = localStorage
     const [myPosts, setMyPosts] = useState()
     const [editZip, setEditZip] = useState(false)
     const [newZip, setNewZip] = useState(pawsZip)
