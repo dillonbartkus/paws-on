@@ -3,15 +3,14 @@ import Welcome from './Welcome'
 import ToS from './ToS'
 import axios from 'axios'
 import camera from './images/camera.png'
-import setUserData from './lib/setUserData'
+import setUserData from './helpers/setUserData'
 import { useHistory } from 'react-router-dom'
-import config from './config'
+import { SERVERURL, AWSKEY, AWSSECRET } from './config'
 import aws from 'aws-sdk'
 
 export default function Register({ showToast }) {
 
     const uploadRef = React.createRef()
-    // const SERVERURL = config.SERVERURL
 
     const [showToS, setShowToS] = useState(false)
     const [isUploaded, setIsUploaded] = useState(false)
@@ -32,7 +31,7 @@ export default function Register({ showToast }) {
         const password = e.currentTarget.childNodes[3].value
         const name = e.currentTarget.childNodes[4].value
         try {
-            const res = await axios.post(`http://localhost:8080/register`, {
+            const res = await axios.post(`${SERVERURL}/register`, {
                 email: email,
                 name: name,
                 password: password,
@@ -51,8 +50,8 @@ export default function Register({ showToast }) {
         const file = uploadRef.current.files[0]
 
         aws.config.update({
-            accessKeyId: config.AWSKEY,
-            secretAccessKey: config.AWSSECRET
+            accessKeyId: AWSKEY,
+            secretAccessKey: AWSSECRET
         });
 
         const s3 = new aws.S3({

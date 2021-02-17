@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom"
 import MyPost from './MyPost'
 import axios from 'axios'
-// import config from './config'
+import { SERVERURL } from './config'
 
-export default function Profile () {
+export default function Profile() {
 
     const { pawsUser, pawsZip, pawsEmail, pawsAvatar } = localStorage
     const [myPosts, setMyPosts] = useState()
@@ -14,101 +14,101 @@ export default function Profile () {
     const [newName, setNewName] = useState(pawsUser)
     const [editPW, setEditPW] = useState(false)
     const [newPW, setNewPW] = useState('')
-    const [pwChanged, setPwChanged]= useState(false)
-    const [pwLengthError, setPwLengthError]= useState(false)
+    const [pwChanged, setPwChanged] = useState(false)
+    const [pwLengthError, setPwLengthError] = useState(false)
     const history = useHistory()
 
-    useEffect( () => {
+    useEffect(() => {
         getMyPosts()
     }, [])
 
     const getMyPosts = async () => {
-        const res = await axios.post(`http://localhost:8080/myposts/3`)
+        const res = await axios.post(`${SERVERURL}/myposts/3`)
         setMyPosts(res.data.data)
-    }  
+    }
 
     const changePW = async () => {
-        const res = await axios.put(`http://localhost:8080/changepw/3`, { password: newPW })
+        const res = await axios.put(`${SERVERURL}/changepw/3`, { password: newPW })
         console.log(res)
-    }  
+    }
 
-    return(
-        
-        <div className = 'profile-page'>
+    return (
 
-            <div className = 'profile'>
+        <div className='profile-page'>
 
-                <img src = {pawsAvatar} alt = 'avatar' />
+            <div className='profile'>
 
-                <div className = 'userinfo'>
+                <img src={pawsAvatar} alt='avatar' />
 
-                    <div className = 'userinfo-section'>
-                        <p className = 'post-subheader'>Name</p>
-                        <p className = 'post-subheader'>Email</p>
-                        <p className = 'post-subheader'>Zip Code</p>
-                        <p className = {`post-subheader ${pwChanged ? '' : 'edit'}`}
-                        onClick = { () => !editName && !editZip &&  setEditPW(!editPW) }
+                <div className='userinfo'>
+
+                    <div className='userinfo-section'>
+                        <p className='post-subheader'>Name</p>
+                        <p className='post-subheader'>Email</p>
+                        <p className='post-subheader'>Zip Code</p>
+                        <p className={`post-subheader ${pwChanged ? '' : 'edit'}`}
+                            onClick={() => !editName && !editZip && setEditPW(!editPW)}
                         >{pwChanged ? 'Password Changed!' : 'Change Password'}</p>
 
-                        {pwLengthError && <p className = 'pw-error'>Password length must be longer than 5 characters.</p> }
+                        {pwLengthError && <p className='pw-error'>Password length must be longer than 5 characters.</p>}
                     </div>
 
-                    <div className = 'userinfo-section'>
-                        { editName ?
-                        <input
-                        onChange = { e => setNewName(e.target.value) }
-                        value = {newName}
-                        name = 'name'
-                        autoFocus
-                        ></input> :
-                        <p className = 'post-subheader'>{pawsUser}</p> }
+                    <div className='userinfo-section'>
+                        {editName ?
+                            <input
+                                onChange={e => setNewName(e.target.value)}
+                                value={newName}
+                                name='name'
+                                autoFocus
+                            ></input> :
+                            <p className='post-subheader'>{pawsUser}</p>}
 
-                        <p className = 'post-subheader'>{pawsEmail}</p>
+                        <p className='post-subheader'>{pawsEmail}</p>
 
-                        { editZip ?
-                        <input
-                        onChange = { e => setNewZip(e.target.value) }
-                        value = {newZip}
-                        name = 'zip'
-                        maxLength = '5'
-                        minLength = '5'
-                        autoFocus
-                        ></input> :
-                        <p className = 'post-subheader'>{pawsZip}</p> }
+                        {editZip ?
+                            <input
+                                onChange={e => setNewZip(e.target.value)}
+                                value={newZip}
+                                name='zip'
+                                maxLength='5'
+                                minLength='5'
+                                autoFocus
+                            ></input> :
+                            <p className='post-subheader'>{pawsZip}</p>}
 
-                        { editPW ?
-                        <input
-                        onChange = { e => setNewPW(e.target.value) }
-                        value = {newPW}
-                        type = 'password'
-                        autoFocus
-                        ></input> :
-                        <p className = 'post-subheader empty'></p> }
+                        {editPW ?
+                            <input
+                                onChange={e => setNewPW(e.target.value)}
+                                value={newPW}
+                                type='password'
+                                autoFocus
+                            ></input> :
+                            <p className='post-subheader empty'></p>}
                     </div>
 
-                    <div className = 'userinfo-section'>
-                        <p className = 'post-subheader edit'
-                        onClick = { () => !editPW && !editZip && setEditName(!editName) }
+                    <div className='userinfo-section'>
+                        <p className='post-subheader edit'
+                            onClick={() => !editPW && !editZip && setEditName(!editName)}
                         >{editName ? 'Done' : 'Edit'}</p>
 
-                        <p className = 'post-subheader empty'></p>
+                        <p className='post-subheader empty'></p>
 
-                        <p className = 'post-subheader edit'
-                        onClick = { () => !editName && !editPW && setEditZip(!editZip) }
+                        <p className='post-subheader edit'
+                            onClick={() => !editName && !editPW && setEditZip(!editZip)}
                         >{editZip ? 'Done' : 'Edit'}</p>
 
-                        { editPW ?
-                        <p className = 'post-subheader edit'
-                        onClick = { () => {
-                            if(newPW.length > 5) {
-                                changePW()
-                                setEditPW(false)
-                                setPwChanged(true)
-                                setPwLengthError(false)
-                            } else setPwLengthError(true)
-                        }}
-                        >Done</p> :
-                        <p className = 'post-subheader empty'></p> }
+                        {editPW ?
+                            <p className='post-subheader edit'
+                                onClick={() => {
+                                    if (newPW.length > 5) {
+                                        changePW()
+                                        setEditPW(false)
+                                        setPwChanged(true)
+                                        setPwLengthError(false)
+                                    } else setPwLengthError(true)
+                                }}
+                            >Done</p> :
+                            <p className='post-subheader empty'></p>}
                     </div>
 
 
@@ -116,24 +116,24 @@ export default function Profile () {
 
             </div>
 
-            <div className = 'my-posts'>
+            <div className='my-posts'>
 
-                <h2 className = 'lostfound'>My Posts</h2>
+                <h2 className='lostfound'>My Posts</h2>
 
-                {myPosts && myPosts.map( post => <MyPost post = {post} key = {post.id} /> )}
+                {myPosts && myPosts.map(post => <MyPost post={post} key={post.id} />)}
 
             </div>
 
-            <div className = 'profile-bottom'>
+            <div className='profile-bottom'>
 
-                <button className = 'blue-button'
-                onClick = { () => history.push('/newpost') }>
-                Create Post</button>
+                <button className='blue-button'
+                    onClick={() => history.push('/newpost')}>
+                    Create Post</button>
 
-                <p className = 'returnhome'
-                onClick = { () => history.push('/') }
-                style = {{  }}>
-                Return Home</p>
+                <p className='returnhome'
+                    onClick={() => history.push('/')}
+                    style={{}}>
+                    Return Home</p>
 
             </div>
 

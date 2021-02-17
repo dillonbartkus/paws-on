@@ -11,7 +11,7 @@ import Profile from './Profile'
 import NewPost from './NewPost'
 import Shelters from './Shelters'
 import Bookmarks from './Bookmarks'
-// import config from './config'
+import { SERVERURL } from './config'
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,7 +32,7 @@ export default function App() {
 
   const fetchFeedData = async () => {
     try {
-      const res = await axios.post(`http://localhost:8080/feed`)
+      const res = await axios.post(`${SERVERURL}/feed`)
       setFeedData(res.data.data)
     }
     catch (err) {
@@ -48,76 +48,76 @@ export default function App() {
   }
 
   return (
-      <div
-        onClick={() => userDropdown && setUserDropdown(false)}
-        className='App'>
+    <div
+      onClick={() => userDropdown && setUserDropdown(false)}
+      className='App'>
 
-        <Router>
+      <Router>
+        <Switch>
+
+          <Route
+            exact path='/login'
+            render={() => <Login />} />
+
+          <Route
+            exact path='/register'
+            render={() => <Register showToast={showNewUserToast} />} />
+
           <Switch>
+            <Route
+              exact path='/post/:id'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <PostDetails feedData={feedData} />
+                <Footer /> </>} />
 
             <Route
-              exact path='/login'
-              render={() => <Login />} />
+              exact path='/profile'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <Profile />
+                <Footer /> </>} />
 
             <Route
-              exact path='/register'
-              render={() => <Register showToast={showNewUserToast} />} />
+              exact path='/newpost'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <NewPost />
+                <Footer /> </>} />
 
-            <Switch>
-              <Route
-                exact path='/post/:id'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <PostDetails feedData={feedData} />
-                  <Footer /> </>} />
+            <Route
+              exact path='/profile'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <Profile />
+                <Footer /> </>} />
 
-              <Route
-                exact path='/profile'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <Profile />
-                  <Footer /> </>} />
+            <Route
+              exact path='/shelters'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <Shelters />
+                <Footer /> </>} />
 
-              <Route
-                exact path='/newpost'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <NewPost />
-                  <Footer /> </>} />
+            <Route
+              exact path='/bookmarks'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <Bookmarks />
+                <Footer /> </>} />
 
-              <Route
-                exact path='/profile'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <Profile />
-                  <Footer /> </>} />
+            <Route
+              exact path='/'
+              render={() => <>
+                <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
+                <Feed feedData={feedData} newUserToast={newUserToast} error={error} />
+                <Footer /> </>} />
 
-              <Route
-                exact path='/shelters'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <Shelters />
-                  <Footer /> </>} />
+            <Redirect to='/' />
 
-              <Route
-                exact path='/bookmarks'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <Bookmarks />
-                  <Footer /> </>} />
-
-              <Route
-                exact path='/'
-                render={() => <>
-                  <Header setUserDropdown={setUserDropdown} userDropdown={userDropdown} />
-                  <Feed feedData={feedData} newUserToast={newUserToast} error={error} />
-                  <Footer /> </>} />
-
-              <Redirect to='/' />
-
-            </Switch>
           </Switch>
-        </Router>
-      </div>
-    )
+        </Switch>
+      </Router>
+    </div>
+  )
 }

@@ -17,7 +17,7 @@ button {
   cursor: pointer;
 }
 
-button:focus {
+button:active {
   animation: click .25s;
 }
 
@@ -183,9 +183,9 @@ select {
 }
 
 .header-logo {
-  height: 66%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .header-logo > img:first-of-type {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import config from './config'
+import { PETKEY } from './config'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ export default function() {
 
     const fetchShelters = async e => {
         e.preventDefault()
-        const res = await axios.get(`https://cors-anywhere.herokuapp.com/http://api.petfinder.com/shelter.find?format=json&key=${config.PETKEY}&location=${zip}`)
+        const res = await axios.get(`https://cors-anywhere.herokuapp.com/http://api.petfinder.com/shelter.find?format=json&key=${PETKEY}&location=${zip}`)
         setShelters(res.data.petfinder.shelters.shelter)
     }
 

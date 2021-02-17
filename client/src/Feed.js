@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Post from './Post'
 import axios from 'axios'
-// import config from './config'
+import { SERVERURL } from './config'
 import left from './images/paws-bg-left.svg'
 import right from './images/paws-bg-right.svg'
 import med from './images/paws-bg-med.svg'
@@ -19,7 +19,7 @@ export default function Feed(props) {
     }, [])
 
     const getUserBookmarks = async () => {  // fetches boomarked posts of user and saves as an array
-        const res = await axios.post(`http://localhost:8080/getUserBookmarks/${localStorage.pawsId}`)
+        const res = await axios.post(`${SERVERURL}/getUserBookmarks/${localStorage.pawsId}`)
         setUserBookmarks(res.data.data[0].array)
     }
 
